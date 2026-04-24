@@ -1,0 +1,15 @@
+import type {
+  ChildCountProps,
+  ChildSizeProps,
+  GridTemplateProps,
+  LayoutPropsBase,
+  OrientationProps,
+  SpacingProps,
+} from '../_types';
+
+export type MatrixLayoutProps = LayoutPropsBase<'matrix'> &
+  ChildCountProps &
+  ChildSizeProps &
+  GridTemplateProps &
+  OrientationProps &
+  SpacingProps;
