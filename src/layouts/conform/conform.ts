@@ -1,4 +1,4 @@
-import type { Layout } from '../_types';
+import type { Layout } from '../types';
 import type { ConformLayoutProps } from './types';
 
 /**

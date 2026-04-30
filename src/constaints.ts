@@ -71,5 +71,5 @@ export const LayoutAdjust = {
   none: 'none',
   expand: 'expand',
   narrow: 'narrow',
-};
+} as const;
 export type LayoutAdjust = (typeof LayoutAdjust)[keyof typeof LayoutAdjust];

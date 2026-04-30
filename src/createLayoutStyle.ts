@@ -1,5 +1,5 @@
 import * as LAYOUTS from './layouts';
-import type { Layout } from './layouts/_types';
+import type { Layout } from './layouts/types';
 import type { LayoutProps } from './types';
 
 /**

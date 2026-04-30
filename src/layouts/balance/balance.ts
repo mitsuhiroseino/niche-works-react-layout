@@ -1,6 +1,6 @@
 import _getGridChildAxisStyle from '../_getGridChildAxisStyle';
 import _getGridContainerForItemsStyle from '../_getGridContainerForItemsStyle';
-import type { Layout } from '../_types';
+import type { Layout } from '../types';
 import type { BalanceLayoutProps } from './types';
 
 /**

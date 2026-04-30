@@ -4,7 +4,7 @@ import type {
   AlignVertical,
   Orientation,
 } from '../constaints';
-import type { ChildSpacing } from './_types';
+import type { ChildSpacing } from './types';
 
 /**
  * display=flexのコンテナーのスタイルを取得

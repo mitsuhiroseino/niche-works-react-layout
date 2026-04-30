@@ -1,5 +1,5 @@
 import unit from '@niche-works/react/utils/unit';
-import type { Layout } from '../_types';
+import type { Layout } from '../types';
 import type { MatrixLayoutProps } from './types';
 
 /**

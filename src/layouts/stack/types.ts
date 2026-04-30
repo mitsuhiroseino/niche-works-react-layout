@@ -5,7 +5,7 @@ import type {
   LayoutPropsBase,
   OrientationProps,
   SpacingProps,
-} from '../_types';
+} from '../types';
 
 /**
  * stackのプロパティ

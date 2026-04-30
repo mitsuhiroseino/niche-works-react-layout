@@ -10,7 +10,7 @@ import type {
   ChildSizeProps,
   GridTemplateProps,
   SpacingProps,
-} from './_types';
+} from './types';
 
 type Options = AlignProps &
   ChildCountProps &

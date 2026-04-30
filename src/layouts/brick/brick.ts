@@ -1,6 +1,6 @@
 import _getGridChildAxisStyle from '../_getGridChildAxisStyle';
 import _getGridContainerForContentStyle from '../_getGridContainerForContentStyle';
-import type { Layout } from '../_types';
+import type { Layout } from '../types';
 import type { BrickLayoutProps } from './types';
 
 /**

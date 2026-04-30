@@ -6,7 +6,7 @@ import type {
   LayoutAdjust,
 } from '../constaints';
 import { MIN_MAX_PROPS } from './_constants';
-import type { ChildSize } from './_types';
+import type { ChildSize } from './types';
 /**
  * 交差軸方向のスタイル
  * @param axis 高さ or 幅

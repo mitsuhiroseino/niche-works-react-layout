@@ -1,7 +1,7 @@
 import _getFlexClossAxisStyle from '../_getFlexClossAxisStyle';
 import _getFlexContainerStyle from '../_getFlexContainerStyle';
 import _getFlexMainAxisStyle from '../_getFlexMainAxisStyle';
-import type { Layout } from '../_types';
+import type { Layout } from '../types';
 import type { StackLayoutProps } from './types';
 
 /**

@@ -6,7 +6,7 @@ import type {
   LayoutAdjust,
 } from '../constaints';
 import { MIN_MAX_PROPS } from './_constants';
-import type { ChildSize } from './_types';
+import type { ChildSize } from './types';
 
 /**
  * 主軸方向のスタイル

@@ -1,3 +1,3 @@
-import type { ChildSizeProps, LayoutPropsBase } from '../_types';
+import type { ChildSizeProps, LayoutPropsBase } from '../types';
 
 export type PlotLayoutProps = LayoutPropsBase<'plot'> & ChildSizeProps;
