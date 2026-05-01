@@ -1,14 +1,14 @@
 import _getGridChildAxisStyle from '../_getGridChildAxisStyle';
 import _getGridContainerForItemsStyle from '../_getGridContainerForItemsStyle';
-import type { Layout } from '../types';
-import type { BalanceLayoutProps } from './types';
+import type { LayoutDefinition } from '../types';
+import type { BalanceLayoutOwnProps } from './types';
 
 /**
  * balanceレイアウト
  *
  * - 子要素を均等に配置する
  */
-const layout: Layout<BalanceLayoutProps> = {
+const layout: LayoutDefinition<BalanceLayoutOwnProps> = {
   name: 'balance',
   defaultProps: {
     orientation: 'horizontal',

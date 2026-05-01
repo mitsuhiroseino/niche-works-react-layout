@@ -1,15 +1,15 @@
 import _getFlexClossAxisStyle from '../_getFlexClossAxisStyle';
 import _getFlexContainerStyle from '../_getFlexContainerStyle';
 import _getFlexMainAxisStyle from '../_getFlexMainAxisStyle';
-import type { Layout } from '../types';
-import type { StackLayoutProps } from './types';
+import type { LayoutDefinition } from '../types';
+import type { StackLayoutOwnProps } from './types';
 
 /**
  * stackレイアウト
  *
  * - 子要素を並べて配置する
  */
-const layout: Layout<StackLayoutProps> = {
+const layout: LayoutDefinition<StackLayoutOwnProps> = {
   name: 'stack',
   defaultProps: {
     orientation: 'horizontal',

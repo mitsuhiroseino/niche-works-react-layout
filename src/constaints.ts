@@ -3,11 +3,11 @@
  */
 export const LayoutType = {
   balance: 'balance',
-  brick: 'brick',
-  conform: 'conform',
   matrix: 'matrix',
-  plot: 'plot',
+  pack: 'pack',
+  pin: 'pin',
   stack: 'stack',
+  tile: 'tile',
 } as const;
 export type LayoutType = (typeof LayoutType)[keyof typeof LayoutType];
 

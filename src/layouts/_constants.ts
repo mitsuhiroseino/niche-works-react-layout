@@ -1,17 +1,17 @@
 import type { BalanceLayoutProps } from './balance';
-import type { BrickLayoutProps } from './brick';
-import type { ConformLayoutProps } from './conform';
 import type { MatrixLayoutProps } from './matrix';
-import type { PlotLayoutProps } from './plot';
+import type { PackLayoutProps } from './pack';
+import type { PinLayoutProps } from './pin';
 import type { StackLayoutProps } from './stack';
+import type { TileLayoutProps } from './tile';
 
 export const LAYOUT_PROPS_KEYS: {
   [K in keyof Required<
     BalanceLayoutProps &
-      BrickLayoutProps &
-      ConformLayoutProps &
+      TileLayoutProps &
+      PackLayoutProps &
       MatrixLayoutProps &
-      PlotLayoutProps &
+      PinLayoutProps &
       StackLayoutProps
   >]: number;
 } = {
@@ -33,6 +33,8 @@ export const LAYOUT_PROPS_KEYS: {
   countVertical: 1,
   spacingVertical: 1,
   templateVertical: 1,
+  flatCss: 1,
+  style: 1,
 };
 
 export const MIN_MAX_PROPS = {

@@ -1,6 +1,6 @@
 import unit from '@niche-works/react/utils/unit';
-import type { Layout } from '../types';
-import type { MatrixLayoutProps } from './types';
+import type { LayoutDefinition } from '../types';
+import type { MatrixLayoutOwnProps } from './types';
 
 /**
  * matrixレイアウト
@@ -10,7 +10,7 @@ import type { MatrixLayoutProps } from './types';
  *   - 横の子要素数
  *   - 子要素のサイズ
  */
-const layout: Layout<MatrixLayoutProps> = {
+const layout: LayoutDefinition<MatrixLayoutOwnProps> = {
   name: 'matrix',
   defaultProps: {
     orientation: 'horizontal',

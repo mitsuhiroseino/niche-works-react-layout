@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode } from 'react';
+import type { CSSProperties } from 'react';
 import type {
   AlignHorizontal,
   AlignVertical,
@@ -6,31 +6,18 @@ import type {
   LayoutType,
   Orientation,
 } from '../constaints';
+import type { LayoutPropsBase } from '../types';
 
 /**
- * レイアウトの共通プロパティ
+ * レイアウト定義の共通プロパティ
  */
-export type LayoutPropsBase<L extends LayoutType> = {
-  /**
-   * レイアウト種別
-   */
-  layout?: L;
-
-  /**
-   * スクロールの有無
-   */
-  scroll?: boolean;
-
-  /**
-   * 子要素のスタイル
-   */
-  childStyle?: CSSProperties;
-
-  /**
-   * 子要素
-   */
-  children?: ReactNode;
-};
+export type LayoutDefinitionPropsBase<L extends LayoutType> =
+  LayoutPropsBase & {
+    /**
+     * レイアウト種別
+     */
+    layout?: L;
+  };
 
 /**
  * 子要素を並べる方向
@@ -144,9 +131,9 @@ export type SpacingProps = {
 };
 
 /**
- * レイアウト設定
+ * レイアウト定義
  */
-export type Layout<P = {}> = {
+export type LayoutDefinition<P = {}> = {
   /**
    * レイアウト名
    */

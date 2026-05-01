@@ -2,7 +2,7 @@ import type {
   AdjustProps,
   AlignProps,
   ChildSizeProps,
-  LayoutPropsBase,
+  LayoutDefinitionPropsBase,
   OrientationProps,
   SpacingProps,
 } from '../types';
@@ -10,8 +10,10 @@ import type {
 /**
  * stackのプロパティ
  */
-export type StackLayoutProps = LayoutPropsBase<'stack'> &
-  AdjustProps &
+export type StackLayoutProps = LayoutDefinitionPropsBase<'stack'> &
+  StackLayoutOwnProps;
+
+export type StackLayoutOwnProps = AdjustProps &
   AlignProps &
   ChildSizeProps &
   OrientationProps &
