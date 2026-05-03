@@ -1,5 +1,6 @@
 import createExternalOptionFunction from '@niche-works/dev/createExternalOptionFunction';
 import distPackage from '@niche-works/rollup-plugin-dist-package';
+import copy from 'rollup-plugin-copy';
 import { defineConfig } from 'tsdown';
 
 export default defineConfig({
@@ -40,16 +41,24 @@ export default defineConfig({
             import: './types.mjs',
             require: './types.cjs',
           },
-          './createLayoutStyle': {
-            import: './createLayoutStyle.mjs',
-            require: './createLayoutStyle.cjs',
+          './hocs/*': {
+            import: './hocs/*/index.mjs',
+            require: './hocs/*/index.cjs',
           },
-          './withLayout': {
-            import: './withLayout.mjs',
-            require: './withLayout.cjs',
+          './utils/*': {
+            import: './hocs/*/index.mjs',
+            require: './hocs/*/index.cjs',
           },
         },
       },
+    }),
+    copy({
+      targets: [
+        {
+          src: ['LICENSE', 'README.md', 'README.ja.md'],
+          dest: 'dist',
+        },
+      ],
     }),
   ],
 });

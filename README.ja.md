@@ -14,7 +14,7 @@ npm install @niche-works/react-layout
 ## 使い方
 
 ```tsx
-import withLayout from '@niche-works/react-layout';
+import { withLayout } from '@niche-works/react-layout';
 
 const LayoutDiv = withLayout('div');
 

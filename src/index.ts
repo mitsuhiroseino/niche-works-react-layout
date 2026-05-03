@@ -1,3 +1,15 @@
+export { default as withBalanceLayout } from './hocs/withBalanceLayout';
 export { default as withLayout } from './hocs/withLayout';
+export { default as withMatrixLayout } from './hocs/withMatrixLayout';
+export { default as withPackLayout } from './hocs/withPackLayout';
+export { default as withPinLayout } from './hocs/withPinLayout';
+export { default as withStackLayout } from './hocs/withStackLayout';
+export { default as withTileLayout } from './hocs/withTileLayout';
 export type * from './types';
+export { default as createBalanceLayoutStyle } from './utils/createBalanceLayoutStyle';
 export { default as createLayoutStyle } from './utils/createLayoutStyle';
+export { default as createMatrixLayoutStyle } from './utils/createMatrixLayoutStyle';
+export { default as createPackLayoutStyle } from './utils/createPackLayoutStyle';
+export { default as createPinLayoutStyle } from './utils/createPinLayoutStyle';
+export { default as createStackLayoutStyle } from './utils/createStackLayoutStyle';
+export { default as createTileLayoutStyle } from './utils/createTileLayoutStyle';
