@@ -1,3 +1,4 @@
+export * from './constaints';
 export { default as withBalanceLayout } from './hocs/withBalanceLayout';
 export { default as withLayout } from './hocs/withLayout';
 export { default as withMatrixLayout } from './hocs/withMatrixLayout';
