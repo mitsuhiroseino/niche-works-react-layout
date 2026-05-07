@@ -12,47 +12,57 @@ export const LayoutType = {
 export type LayoutType = (typeof LayoutType)[keyof typeof LayoutType];
 
 /**
- * 並べる方向
+ * 整列方向
  */
-export const Orientation = {
-  horizontal: 'horizontal',
-  vertical: 'vertical',
+export const Direction = {
+  x: 'x',
+  y: 'y',
 } as const;
-export type Orientation = (typeof Orientation)[keyof typeof Orientation];
+export type Direction = (typeof Direction)[keyof typeof Direction];
 
 /**
- * 縦横共通の位置
+ * 横位置
+ *
+ * - left: 左
+ * - center: 中央
+ * - right: 右
+ * - space-between: 両端揃え
+ * - space-around: 両端余白あり均等
+ * - space-evenly: 完全均等
+ * - fit: 親のサイズで均等配置
  */
-export const CommonAlign = {
+export const AlignX = {
+  left: 'left',
+  center: 'center',
+  right: 'right',
   'space-between': 'space-between',
   'space-around': 'space-around',
   'space-evenly': 'space-evenly',
   fit: 'fit',
 } as const;
-export type CommonAlign = (typeof CommonAlign)[keyof typeof CommonAlign];
-
-/**
- * 横位置
- */
-export const AlignHorizontal = {
-  ...CommonAlign,
-  left: 'left',
-  center: 'center',
-  right: 'right',
-} as const;
-export type AlignHorizontal =
-  (typeof AlignHorizontal)[keyof typeof AlignHorizontal];
+export type AlignX = (typeof AlignX)[keyof typeof AlignX];
 
 /**
  * 縦位置
+ *
+ * - top: 上
+ * - middle: 中央
+ * - bottom: 下
+ * - space-between: 両端揃え
+ * - space-around: 両端余白あり均等
+ * - space-evenly: 完全均等
+ * - fit: 親のサイズで均等配置
  */
-export const AlignVertical = {
-  ...CommonAlign,
+export const AlignY = {
   top: 'top',
   middle: 'middle',
   bottom: 'bottom',
+  'space-between': 'space-between',
+  'space-around': 'space-around',
+  'space-evenly': 'space-evenly',
+  fit: 'fit',
 } as const;
-export type AlignVertical = (typeof AlignVertical)[keyof typeof AlignVertical];
+export type AlignY = (typeof AlignY)[keyof typeof AlignY];
 
 /**
  * 親要素のサイズを基準にした子要素のサイズ調整
@@ -63,13 +73,13 @@ export type AlignVertical = (typeof AlignVertical)[keyof typeof AlignVertical];
  * - `expand`
  *   - 親のサイズに足りないとき: 伸ばす
  *   - 親のサイズを超えるとき: そのまま
- * - `narrow`
+ * - `shrink`
  *   - 親のサイズに足りないとき: そのまま
  *   - 親のサイズを超えるとき: 縮める
  */
 export const LayoutAdjust = {
   none: 'none',
   expand: 'expand',
-  narrow: 'narrow',
+  shrink: 'shrink',
 } as const;
 export type LayoutAdjust = (typeof LayoutAdjust)[keyof typeof LayoutAdjust];

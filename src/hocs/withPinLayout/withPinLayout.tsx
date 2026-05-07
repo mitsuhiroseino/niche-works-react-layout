@@ -1,6 +1,7 @@
+import type { LooseRecord } from '@niche-works/types';
 import type { ElementType } from 'react';
 import { forwardRef } from 'react';
-import { LayoutType } from '../../constaints';
+import pin from '../../layouts/pin';
 import withLayoutBase from '../withLayoutBase';
 import type { WithPinLayoutOptions, WithPinLayoutProps } from './types';
 
@@ -10,7 +11,7 @@ import type { WithPinLayoutOptions, WithPinLayoutProps } from './types';
  * @param options オプション
  * @returns
  */
-export default function withPinLayout<P = {}, T = unknown>(
+export default function withPinLayout<P = LooseRecord, T = unknown>(
   Component: ElementType<P>,
   options: WithPinLayoutOptions = {},
 ) {
@@ -24,8 +25,9 @@ export default function withPinLayout<P = {}, T = unknown>(
       return (
         <LayoutComponentBase
           ref={ref}
-          layout={LayoutType.pin}
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           {...(props as any)}
+          layout={pin}
         />
       );
     },

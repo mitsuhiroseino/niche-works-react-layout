@@ -6,23 +6,12 @@ export type WidthLayoutOptions = StyleProxyOptions & {
    * コンポーネントに設定するdisplayName
    */
   displayName?: string;
-
-  /**
-   * プレーンなCSSで返す
-   * trueの場合はコンテナーと子要素にそれぞれスタイルを適用する
-   */
-  flatCss?: boolean;
 };
 
 /**
  * レイアウトの共通プロパティ
  */
-export type LayoutPropsBase = LayoutUtilOptionsBase & {
-  /**
-   * 子要素
-   */
-  children?: ReactNode;
-};
+export type LayoutPropsBase = TargetComponentProps & LayoutUtilOptionsBase;
 
 /**
  * レイアウトユーティリティの共通プロパティ
@@ -34,18 +23,22 @@ export type LayoutUtilOptionsBase = {
   scroll?: boolean;
 
   /**
-   * コンテナーのスタイル
+   * スタイル
    */
   style?: CSSProperties;
+};
+
+/**
+ * レイアウトを付与する対象のコンポーネントの最低限のプロパティ
+ */
+export type TargetComponentProps = {
+  /**
+   * クラス名
+   */
+  className?: string;
 
   /**
-   * 子要素のスタイル
+   * 子要素
    */
-  childStyle?: CSSProperties;
-
-  /**
-   * プレーンなCSSで返す
-   * trueの場合はコンテナーと子要素のスタイルがそれぞれ返る
-   */
-  flatCss?: boolean;
+  children?: ReactNode;
 };

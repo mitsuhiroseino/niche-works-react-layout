@@ -3,8 +3,8 @@ import type {
   AlignProps,
   ChildCountProps,
   ChildSizeProps,
+  DirectionProps,
   LayoutDefinitionPropsBase,
-  OrientationProps,
   SpacingProps,
 } from '../types';
 
@@ -18,5 +18,5 @@ export type TileLayoutOwnProps = AdjustProps &
   AlignProps &
   ChildCountProps &
   ChildSizeProps &
-  OrientationProps &
+  DirectionProps &
   SpacingProps;

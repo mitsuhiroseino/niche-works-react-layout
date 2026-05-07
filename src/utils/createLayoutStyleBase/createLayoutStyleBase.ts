@@ -14,35 +14,26 @@ export default function createLayoutStyleBase(
   layout: LayoutDefinition,
   options: CreateLayoutStyleBaseOptions = {},
 ): CreateLayoutStyleBaseResult {
-  const { scroll, flatCss, style, childStyle: cStyle, ...rest } = options;
+  const { scroll, style, ...rest } = options;
   // layoutを取得
-  const { getContainerStyle, getChildStyle, defaultProps } = layout;
+  const { createStyle, defaultProps } = layout;
   const argProps = maybeDefault(rest, defaultProps);
   // コンテナーのスタイル
-  let layoutedStyle = getContainerStyle ? getContainerStyle(argProps) : null;
+  const { className, style: layoutedStyle = {} } = createStyle
+    ? createStyle(argProps)
+    : {};
   if (scroll) {
-    layoutedStyle = layoutedStyle || {};
     layoutedStyle.overflow = 'auto';
   }
   if (style) {
     // コンテナーのスタイルのマージ
-    layoutedStyle = { ...layoutedStyle, ...style };
+    Object.assign(layoutedStyle, style);
   }
 
-  // 子要素のスタイル
-  let layoutedChildStyle = getChildStyle ? getChildStyle(argProps) : null;
-  if (flatCss) {
-    if (cStyle) {
-      // 子要素のスタイルのマージ
-      layoutedChildStyle = { ...layoutedChildStyle, ...cStyle };
-    }
-  } else {
-    if (layoutedChildStyle) {
-      // 子要素のスタイルをコンテナーのスタイルにネスト
-      layoutedStyle['& > *'] = layoutedChildStyle;
-      layoutedChildStyle = null;
-    }
-  }
-
-  return { style: layoutedStyle, childStyle: layoutedChildStyle };
+  const result = {
+    className,
+    style: layoutedStyle,
+  };
+  console.log(result);
+  return result;
 }

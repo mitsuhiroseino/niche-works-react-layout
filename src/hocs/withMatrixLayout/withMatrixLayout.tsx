@@ -1,6 +1,7 @@
+import type { LooseRecord } from '@niche-works/types';
 import type { ElementType } from 'react';
 import { forwardRef } from 'react';
-import { LayoutType } from '../../constaints';
+import matrix from '../../layouts/matrix';
 import withLayoutBase from '../withLayoutBase';
 import type { WithMatrixLayoutOptions, WithMatrixLayoutProps } from './types';
 
@@ -10,7 +11,7 @@ import type { WithMatrixLayoutOptions, WithMatrixLayoutProps } from './types';
  * @param options オプション
  * @returns
  */
-export default function withMatrixLayout<P = {}, T = unknown>(
+export default function withMatrixLayout<P = LooseRecord, T = unknown>(
   Component: ElementType<P>,
   options: WithMatrixLayoutOptions = {},
 ) {
@@ -24,8 +25,9 @@ export default function withMatrixLayout<P = {}, T = unknown>(
       return (
         <LayoutComponentBase
           ref={ref}
-          layout={LayoutType.matrix}
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           {...(props as any)}
+          layout={matrix}
         />
       );
     },

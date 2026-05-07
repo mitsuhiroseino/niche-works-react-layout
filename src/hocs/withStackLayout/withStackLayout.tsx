@@ -1,6 +1,7 @@
+import type { LooseRecord } from '@niche-works/types';
 import type { ElementType } from 'react';
 import { forwardRef } from 'react';
-import { LayoutType } from '../../constaints';
+import stack from '../../layouts/stack';
 import withLayoutBase from '../withLayoutBase';
 import type { WithStackLayoutOptions, WithStackLayoutProps } from './types';
 
@@ -10,7 +11,7 @@ import type { WithStackLayoutOptions, WithStackLayoutProps } from './types';
  * @param options オプション
  * @returns
  */
-export default function withStackLayout<P = {}, T = unknown>(
+export default function withStackLayout<P = LooseRecord, T = unknown>(
   Component: ElementType<P>,
   options: WithStackLayoutOptions = {},
 ) {
@@ -24,8 +25,9 @@ export default function withStackLayout<P = {}, T = unknown>(
       return (
         <LayoutComponentBase
           ref={ref}
-          layout={LayoutType.stack}
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           {...(props as any)}
+          layout={stack}
         />
       );
     },

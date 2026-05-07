@@ -28,6 +28,7 @@ export default defineConfig({
       content: {
         main: './index.cjs',
         module: './index.mjs',
+        sideEffects: ['**/*.css'],
         exports: {
           '.': {
             import: './index.mjs',

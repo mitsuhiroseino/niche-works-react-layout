@@ -1,6 +1,7 @@
+import type { LooseRecord } from '@niche-works/types';
 import type { ElementType } from 'react';
 import { forwardRef } from 'react';
-import { LayoutType } from '../../constaints';
+import balance from '../../layouts/balance';
 import withLayoutBase from '../withLayoutBase';
 import type { WithBalanceLayoutOptions, WithBalanceLayoutProps } from './types';
 
@@ -10,7 +11,7 @@ import type { WithBalanceLayoutOptions, WithBalanceLayoutProps } from './types';
  * @param options オプション
  * @returns
  */
-export default function withBalanceLayout<P = {}, T = unknown>(
+export default function withBalanceLayout<P = LooseRecord, T = unknown>(
   Component: ElementType<P>,
   options: WithBalanceLayoutOptions = {},
 ) {
@@ -21,11 +22,13 @@ export default function withBalanceLayout<P = {}, T = unknown>(
    */
   const LayoutComponent = forwardRef<T, P & WithBalanceLayoutProps>(
     (props, ref) => {
+      console.log(props, balance);
       return (
         <LayoutComponentBase
           ref={ref}
-          layout={LayoutType.balance}
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           {...(props as any)}
+          layout={balance}
         />
       );
     },

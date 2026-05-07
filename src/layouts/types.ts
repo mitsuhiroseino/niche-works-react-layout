@@ -1,10 +1,11 @@
+import type { LooseRecord } from '@niche-works/types';
 import type { CSSProperties } from 'react';
 import type {
-  AlignHorizontal,
-  AlignVertical,
+  AlignX,
+  AlignY,
+  Direction,
   LayoutAdjust,
   LayoutType,
-  Orientation,
 } from '../constaints';
 import type { LayoutPropsBase } from '../types';
 
@@ -22,11 +23,11 @@ export type LayoutDefinitionPropsBase<L extends LayoutType> =
 /**
  * 子要素を並べる方向
  */
-export type OrientationProps = {
+export type DirectionProps = {
   /**
    * 並べる方向
    */
-  orientation?: Orientation;
+  direction?: Direction;
 };
 
 /**
@@ -36,12 +37,12 @@ export type AlignProps = {
   /**
    * 子要素の横位置
    */
-  alignHorizontal?: AlignHorizontal;
+  alignX?: AlignX;
 
   /**
    * 子要素の縦位置
    */
-  alignVertical?: AlignVertical;
+  alignY?: AlignY;
 };
 
 /**
@@ -50,17 +51,17 @@ export type AlignProps = {
 export type AdjustProps = {
   /**
    * 子要素の幅の調整
-   * sizeHorizontalを指定した場合に有効
+   * childSizeXを指定した場合に有効
    * デフォルトは`none`
    */
-  adjustHorizontal?: LayoutAdjust;
+  adjustX?: LayoutAdjust;
 
   /**
    * 子要素の高さの調整
-   * sizeVerticalを指定した場合に有効
+   * childSizeYを指定した場合に有効
    * デフォルトは`none`
    */
-  adjustVertical?: LayoutAdjust;
+  adjustY?: LayoutAdjust;
 };
 
 /**
@@ -68,14 +69,14 @@ export type AdjustProps = {
  */
 export type ChildSizeProps = {
   /**
-   * 子要素の高さ
+   * 子要素の幅
    */
-  sizeHorizontal?: ChildSize;
+  childSizeX?: ChildSize;
 
   /**
    * 子要素の高さ
    */
-  sizeVertical?: ChildSize;
+  childSizeY?: ChildSize;
 };
 
 /**
@@ -85,12 +86,12 @@ export type ChildCountProps = {
   /**
    * 横方向の要素数
    */
-  countHorizontal?: number;
+  childCountX?: number;
 
   /**
    * 縦方向の要素数
    */
-  countVertical?: number;
+  childCountY?: number;
 };
 
 /**
@@ -99,15 +100,15 @@ export type ChildCountProps = {
 export type GridTemplateProps = {
   /**
    * 横方向の設定
-   * このプロパティが設定されている場合、countHorizontal,sizeHorizontalは無効
+   * このプロパティが設定されている場合、childCountX,childSizeXは無効
    */
-  templateHorizontal?: GridTemplate | (string | number)[];
+  templateX?: GridTemplate | (string | number)[];
 
   /**
    * 縦方向の設定
-   * このプロパティが設定されている場合、countVertical,sizeVerticalは無効
+   * このプロパティが設定されている場合、childCountY,childSizeYは無効
    */
-  templateVertical?: GridTemplate | (string | number)[];
+  templateY?: GridTemplate | (string | number)[];
 };
 
 /**
@@ -117,23 +118,23 @@ export type SpacingProps = {
   /**
    * 余白
    */
-  spacingAll?: ChildSpacing;
+  spacing?: ChildSpacing;
 
   /**
    * 横方向の余白
    */
-  spacingHorizontal?: ChildSpacing;
+  spacingX?: ChildSpacing;
 
   /**
    * 縦方向の余白
    */
-  spacingVertical?: ChildSpacing;
+  spacingY?: ChildSpacing;
 };
 
 /**
  * レイアウト定義
  */
-export type LayoutDefinition<P = {}> = {
+export type LayoutDefinition<P = LooseRecord> = {
   /**
    * レイアウト名
    */
@@ -149,14 +150,7 @@ export type LayoutDefinition<P = {}> = {
    * @param props
    * @returns
    */
-  getContainerStyle?: (props: P) => CSSProperties;
-
-  /**
-   * 子要素のスタイル
-   * @param props
-   * @returns
-   */
-  getChildStyle?: (props: P) => CSSProperties;
+  createStyle: (props: P) => StyleResult;
 };
 
 /**
@@ -174,3 +168,22 @@ export type ChildSpacing = CSSProperties['gap'];
  */
 export type GridTemplate = CSSProperties['gridTemplateColumns'] &
   CSSProperties['gridTemplateRows'];
+
+export type StyleResult = {
+  /**
+   * クラス
+   */
+  className?: string;
+
+  /**
+   * スタイル
+   */
+  style?: CSSPropertiesWithVars;
+};
+
+/**
+ * CSS変数を許容するCSSProperties
+ */
+export type CSSPropertiesWithVars = CSSProperties & {
+  [key: `--${string}`]: string | number | undefined;
+};

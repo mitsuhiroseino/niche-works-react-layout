@@ -1,4 +1,9 @@
-import type { LayoutDefinition } from '../types';
+import clsx from 'clsx';
+import { clsLayoutDirection } from '../_constants';
+import _applySpacing from '../_helpers/_applySpacing';
+import { clsLayoutPack } from '../constants';
+import type { LayoutDefinition, StyleResult } from '../types';
+import './styles.scss';
 import type { PackLayoutOwnProps } from './types';
 
 /**
@@ -9,39 +14,19 @@ import type { PackLayoutOwnProps } from './types';
 const layout: LayoutDefinition<PackLayoutOwnProps> = {
   name: 'pack',
   defaultProps: {
-    orientation: 'horizontal',
+    direction: 'x',
   },
-  getContainerStyle: (props) => {
-    const {
-      orientation,
-      spacingAll,
-      spacingHorizontal = spacingAll,
-      spacingVertical = spacingAll,
-    } = props;
-    return {
-      display: 'grid',
-      rowGap: spacingVertical,
-      columnGap: spacingHorizontal,
-      ...(orientation === 'horizontal'
-        ? {
-            gridAutoFlow: 'column',
-            gridTemplateRows: 'auto',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(0, 1fr))',
-          }
-        : {
-            gridAutoFlow: 'row',
-            gridTemplateRows: 'repeat(auto-fit, minmax(0, 1fr))',
-            gridTemplateColumns: 'auto',
-          }),
+  createStyle: (props) => {
+    const { direction, spacing, spacingX, spacingY } = props;
+    const result: StyleResult = {
+      className: clsx(clsLayoutPack, clsLayoutDirection[direction]),
+      style: {},
     };
-  },
-  getChildStyle: () => {
-    return {
-      height: 'auto',
-      width: 'auto',
-      minHeight: 0,
-      minWidth: 0,
-    };
+
+    // 間隔の適用
+    _applySpacing(result, spacing, spacingX, spacingY);
+
+    return result;
   },
 };
 export default layout;

@@ -1,6 +1,14 @@
-import _getGridChildAxisStyle from '../_getGridChildAxisStyle';
-import _getGridContainerForItemsStyle from '../_getGridContainerForItemsStyle';
-import type { LayoutDefinition } from '../types';
+import clsx from 'clsx';
+import {
+  clsLayoutAdjust,
+  clsLayoutAlign,
+  clsLayoutDirection,
+} from '../_constants';
+import _applyChildSize from '../_helpers/_applyChildSize';
+import _applySpacing from '../_helpers/_applySpacing';
+import { clsLayoutBalance } from '../constants';
+import type { LayoutDefinition, StyleResult } from '../types';
+import './styles.scss';
 import type { BalanceLayoutOwnProps } from './types';
 
 /**
@@ -11,42 +19,42 @@ import type { BalanceLayoutOwnProps } from './types';
 const layout: LayoutDefinition<BalanceLayoutOwnProps> = {
   name: 'balance',
   defaultProps: {
-    orientation: 'horizontal',
-    alignHorizontal: 'left',
-    alignVertical: 'top',
+    direction: 'x',
+    alignX: 'left',
+    alignY: 'top',
   },
-  getContainerStyle: (props) => {
-    const { orientation, ...rest } = props;
-
-    return _getGridContainerForItemsStyle(orientation, rest);
-  },
-
-  getChildStyle: (props) => {
+  createStyle: (props) => {
     const {
-      alignHorizontal,
-      sizeHorizontal,
-      adjustHorizontal,
-      alignVertical,
-      sizeVertical,
-      adjustVertical,
+      direction,
+      alignX,
+      alignY,
+      adjustX,
+      adjustY,
+      spacing,
+      spacingX,
+      spacingY,
+      childSizeX,
+      childSizeY,
     } = props;
-
-    return {
-      ..._getGridChildAxisStyle(
-        'items',
-        'width',
-        alignHorizontal,
-        sizeHorizontal,
-        adjustHorizontal,
+    const result: StyleResult = {
+      className: clsx(
+        clsLayoutBalance,
+        clsLayoutDirection[direction],
+        clsLayoutAlign.x[alignX],
+        clsLayoutAlign.y[alignY],
+        clsLayoutAdjust.x[adjustX],
+        clsLayoutAdjust.y[adjustY],
       ),
-      ..._getGridChildAxisStyle(
-        'items',
-        'height',
-        alignVertical,
-        sizeVertical,
-        adjustVertical,
-      ),
+      style: {},
     };
+
+    // 間隔の適用
+    _applySpacing(result, spacing, spacingX, spacingY);
+
+    // 子要素のサイズ
+    _applyChildSize(result, childSizeX, childSizeY);
+
+    return result;
   },
 };
 export default layout;

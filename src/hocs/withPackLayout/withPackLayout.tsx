@@ -1,6 +1,7 @@
+import type { LooseRecord } from '@niche-works/types';
 import type { ElementType } from 'react';
 import { forwardRef } from 'react';
-import { LayoutType } from '../../constaints';
+import pack from '../../layouts/pack';
 import withLayoutBase from '../withLayoutBase';
 import type { WithPackLayoutOptions, WithPackLayoutProps } from './types';
 
@@ -10,7 +11,7 @@ import type { WithPackLayoutOptions, WithPackLayoutProps } from './types';
  * @param options オプション
  * @returns
  */
-export default function withPackLayout<P = {}, T = unknown>(
+export default function withPackLayout<P = LooseRecord, T = unknown>(
   Component: ElementType<P>,
   options: WithPackLayoutOptions = {},
 ) {
@@ -24,8 +25,9 @@ export default function withPackLayout<P = {}, T = unknown>(
       return (
         <LayoutComponentBase
           ref={ref}
-          layout={LayoutType.pack}
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           {...(props as any)}
+          layout={pack}
         />
       );
     },

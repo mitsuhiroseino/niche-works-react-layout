@@ -1,5 +1,15 @@
 import unit from '@niche-works/react/utils/unit';
-import type { LayoutDefinition } from '../types';
+import clsx from 'clsx';
+import { clsLayoutDirection } from '../_constants';
+import _applyChildSize from '../_helpers/_applyChildSize';
+import _applySpacing from '../_helpers/_applySpacing';
+import {
+  clsLayoutMatrix,
+  varLayoutTemplateX,
+  varLayoutTemplateY,
+} from '../constants';
+import type { LayoutDefinition, StyleResult } from '../types';
+import './styles.scss';
 import type { MatrixLayoutOwnProps } from './types';
 
 /**
@@ -13,45 +23,44 @@ import type { MatrixLayoutOwnProps } from './types';
 const layout: LayoutDefinition<MatrixLayoutOwnProps> = {
   name: 'matrix',
   defaultProps: {
-    orientation: 'horizontal',
+    direction: 'x',
   },
-  getContainerStyle: (props) => {
+  createStyle: (props) => {
     const {
-      orientation,
-      countHorizontal,
-      countVertical,
-      templateHorizontal,
-      templateVertical,
-      spacingAll,
-      spacingHorizontal = spacingAll,
-      spacingVertical = spacingAll,
-      sizeHorizontal,
-      sizeVertical,
+      direction,
+      childCountX,
+      childCountY,
+      templateX,
+      templateY,
+      spacing,
+      spacingX = spacing,
+      spacingY = spacing,
+      childSizeX,
+      childSizeY,
     } = props;
+    const result: StyleResult = {
+      className: clsx(clsLayoutMatrix, clsLayoutDirection[direction]),
+      style: {
+        [varLayoutTemplateX]: _getGridTemplate(
+          templateX,
+          childSizeX,
+          childCountX,
+        ),
+        [varLayoutTemplateY]: _getGridTemplate(
+          templateY,
+          childSizeY,
+          childCountY,
+        ),
+      },
+    };
 
-    return {
-      display: 'grid',
-      gridAutoFlow: orientation === 'horizontal' ? 'row' : 'column',
-      gridTemplateColumns: _getGridTemplate(
-        templateHorizontal,
-        sizeHorizontal,
-        countHorizontal,
-      ),
-      gridTemplateRows: _getGridTemplate(
-        templateVertical,
-        sizeVertical,
-        countVertical,
-      ),
-      columnGap: spacingHorizontal,
-      rowGap: spacingVertical,
-    };
-  },
-  getChildStyle: (props) => {
-    const { sizeHorizontal, sizeVertical } = props;
-    return {
-      width: sizeHorizontal,
-      height: sizeVertical,
-    };
+    // 間隔の適用
+    _applySpacing(result, spacing, spacingX, spacingY);
+
+    // 子要素のサイズ
+    _applyChildSize(result, childSizeX, childSizeY);
+
+    return result;
   },
 };
 export default layout;
@@ -64,7 +73,7 @@ export default layout;
  * @returns
  */
 function _getGridTemplate(
-  gridSetting: string | {} | (string | number)[],
+  gridSetting: string | number | (string | number)[],
   size: string | number,
   count: number,
 ) {

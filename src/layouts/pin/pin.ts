@@ -1,4 +1,7 @@
-import type { LayoutDefinition } from '../types';
+import _applyChildSize from '../_helpers/_applyChildSize';
+import { clsLayoutPin } from '../constants';
+import type { LayoutDefinition, StyleResult } from '../types';
+import './styles.scss';
 import type { PinLayoutOwnProps } from './types';
 
 /**
@@ -8,19 +11,17 @@ import type { PinLayoutOwnProps } from './types';
  */
 const layout: LayoutDefinition<PinLayoutOwnProps> = {
   name: 'pin',
-  getContainerStyle: () => {
-    return {
-      display: 'block',
-      position: 'relative',
+  createStyle: (props) => {
+    const { childSizeX, childSizeY } = props;
+    const result: StyleResult = {
+      className: clsLayoutPin,
+      style: {},
     };
-  },
-  getChildStyle: (props) => {
-    const { sizeHorizontal, sizeVertical } = props;
-    return {
-      position: 'absolute',
-      width: sizeHorizontal,
-      height: sizeVertical,
-    };
+
+    // 子要素のサイズ
+    _applyChildSize(result, childSizeX, childSizeY);
+
+    return result;
   },
 };
 export default layout;

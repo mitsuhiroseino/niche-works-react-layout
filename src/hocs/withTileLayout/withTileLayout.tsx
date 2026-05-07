@@ -1,6 +1,7 @@
+import type { LooseRecord } from '@niche-works/types';
 import type { ElementType } from 'react';
 import { forwardRef } from 'react';
-import { LayoutType } from '../../constaints';
+import tile from '../../layouts/tile';
 import withLayoutBase from '../withLayoutBase';
 import type { WithTileLayoutOptions, WithTileLayoutProps } from './types';
 
@@ -10,7 +11,7 @@ import type { WithTileLayoutOptions, WithTileLayoutProps } from './types';
  * @param options オプション
  * @returns
  */
-export default function withTileLayout<P = {}, T = unknown>(
+export default function withTileLayout<P = LooseRecord, T = unknown>(
   Component: ElementType<P>,
   options: WithTileLayoutOptions = {},
 ) {
@@ -24,8 +25,9 @@ export default function withTileLayout<P = {}, T = unknown>(
       return (
         <LayoutComponentBase
           ref={ref}
-          layout={LayoutType.tile}
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           {...(props as any)}
+          layout={tile}
         />
       );
     },

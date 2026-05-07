@@ -14,10 +14,4 @@ export type WithLayoutBaseOptions = StyleProxyOptions & {
    * コンポーネントに設定するdisplayName
    */
   displayName?: string;
-
-  /**
-   * プレーンなCSSで返す
-   * trueの場合はコンテナーと子要素にそれぞれスタイルを適用する
-   */
-  flatCss?: boolean;
 };
