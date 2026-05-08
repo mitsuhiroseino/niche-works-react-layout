@@ -1,4 +1,4 @@
-import proxyStyle from '@niche-works/react-style-proxy';
+import { styleProxy } from '@niche-works/react-style-proxy';
 import ensureComponent from '@niche-works/react/utils/ensureComponent';
 import clsx from 'clsx';
 import type { ElementType } from 'react';
@@ -34,7 +34,7 @@ export default function withLayoutBase<
         delete rest[key];
       }
       // コンテナーのスタイル
-      const containerProps = proxyStyle<P>(
+      const containerProps = styleProxy<P>(
         rest as unknown as P,
         style,
         proxyStyleOpts,

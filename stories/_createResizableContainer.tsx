@@ -42,7 +42,12 @@ export default function _createResizableContainer(
   Component: ComponentType<any>,
 ) {
   return (
-    props: LayoutContainerProps & ResizableProps & { childCount: number },
+    props: LayoutContainerProps &
+      ResizableProps & {
+        childCount: number;
+        sizeType?: string;
+        posType?: string;
+      },
   ) => {
     const { children, ...rest } = props;
     const resizableProps: ResizableProps = {};
@@ -52,7 +57,12 @@ export default function _createResizableContainer(
       if (RESIZABLE_PROPS.includes(prop)) {
         (resizableProps as any)[prop] = value;
       } else {
-        (containerProps as any)[prop] = value;
+        const num = Number(value);
+        if (value == null || value === '' || isNaN(num)) {
+          (containerProps as any)[prop] = value;
+        } else {
+          (containerProps as any)[prop] = num;
+        }
       }
     }
 

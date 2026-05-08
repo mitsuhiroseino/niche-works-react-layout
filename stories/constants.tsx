@@ -103,6 +103,20 @@ export const GRID_TEMPLATE_ARG_TYPES: ArgTypes = {
   },
 };
 
+export const DEBUG_ARG_TYPES: ArgTypes = {
+  childCount: {
+    type: 'number',
+  },
+  sizeType: {
+    control: { type: 'select' },
+    options: ['none', 'rand', 'static'],
+  },
+  posType: {
+    control: { type: 'select' },
+    options: ['none', 'rand', 'static'],
+  },
+};
+
 export const ARG_TYPES = {
   all: {
     ...LAYOUT_ARG_TYPES,
@@ -113,6 +127,7 @@ export const ARG_TYPES = {
     ...SPACING_ARG_TYPES,
     ...CHILD_COUNT_ARG_TYPES,
     ...GRID_TEMPLATE_ARG_TYPES,
+    ...DEBUG_ARG_TYPES,
   },
   nosize: {
     ...LAYOUT_ARG_TYPES,
@@ -122,6 +137,7 @@ export const ARG_TYPES = {
     ...SPACING_ARG_TYPES,
     ...CHILD_COUNT_ARG_TYPES,
     ...GRID_TEMPLATE_ARG_TYPES,
+    ...DEBUG_ARG_TYPES,
   },
   balance: {
     ...DIRECTION_ARG_TYPES,
@@ -129,6 +145,7 @@ export const ARG_TYPES = {
     ...ADJUST_ARG_TYPES,
     ...SPACING_ARG_TYPES,
     ...CHILD_SIZE_ARG_TYPES,
+    ...DEBUG_ARG_TYPES,
   },
   matrix: {
     ...DIRECTION_ARG_TYPES,
@@ -136,13 +153,16 @@ export const ARG_TYPES = {
     ...GRID_TEMPLATE_ARG_TYPES,
     ...CHILD_COUNT_ARG_TYPES,
     ...CHILD_SIZE_ARG_TYPES,
+    ...DEBUG_ARG_TYPES,
   },
   pack: {
     ...DIRECTION_ARG_TYPES,
     ...SPACING_ARG_TYPES,
+    ...DEBUG_ARG_TYPES,
   },
   pin: {
     ...CHILD_SIZE_ARG_TYPES,
+    ...DEBUG_ARG_TYPES,
   },
   stack: {
     ...DIRECTION_ARG_TYPES,
@@ -151,6 +171,7 @@ export const ARG_TYPES = {
     ...CHILD_SIZE_ARG_TYPES,
     ...SPACING_ARG_TYPES,
     ...CHILD_COUNT_ARG_TYPES,
+    ...DEBUG_ARG_TYPES,
   },
   tile: {
     ...DIRECTION_ARG_TYPES,
@@ -159,12 +180,12 @@ export const ARG_TYPES = {
     ...SPACING_ARG_TYPES,
     ...CHILD_COUNT_ARG_TYPES,
     ...CHILD_SIZE_ARG_TYPES,
+    ...DEBUG_ARG_TYPES,
   },
 } as const;
 
 export const LAYOUT_PROPS: LayoutUtilOptionsBase = {
   scroll: true,
-  childStyle: undefined,
 };
 
 export const DIRECTION_PROPS: DirectionProps = {
@@ -213,6 +234,12 @@ export const CONTAINER_PARAMS: any = {
   },
 };
 
+export const DEBUG_PARAMS: any = {
+  childCount: 12,
+  sizeType: 'none',
+  posType: 'none',
+};
+
 export const ARGS: Record<string, Record<string, any>> = {
   all: {
     ...LAYOUT_PROPS,
@@ -224,6 +251,7 @@ export const ARGS: Record<string, Record<string, any>> = {
     ...SPACING_PROPS,
     ...CHILD_COUNT_PROPS,
     ...CONTAINER_PROPS,
+    ...DEBUG_PARAMS,
   },
   nosize: {
     ...LAYOUT_PROPS,
@@ -234,6 +262,7 @@ export const ARGS: Record<string, Record<string, any>> = {
     ...SPACING_PROPS,
     ...CHILD_COUNT_PROPS,
     ...CONTAINER_PROPS,
+    ...DEBUG_PARAMS,
   },
   balance: {
     ...LAYOUT_PROPS,
@@ -243,6 +272,7 @@ export const ARGS: Record<string, Record<string, any>> = {
     ...CHILD_SIZE_PROPS,
     ...SPACING_PROPS,
     ...CONTAINER_PROPS,
+    ...DEBUG_PARAMS,
   },
   matrix: {
     ...LAYOUT_PROPS,
@@ -252,17 +282,21 @@ export const ARGS: Record<string, Record<string, any>> = {
     ...GRID_TEMPLATE_PROPS,
     ...SPACING_PROPS,
     ...CONTAINER_PROPS,
+    ...DEBUG_PARAMS,
   },
   pin: {
     ...LAYOUT_PROPS,
     ...CHILD_SIZE_PROPS,
     ...CONTAINER_PROPS,
+    ...DEBUG_PARAMS,
+    posType: 'rand',
   },
   pack: {
     ...LAYOUT_PROPS,
     ...DIRECTION_PROPS,
     ...SPACING_PROPS,
     ...CONTAINER_PROPS,
+    ...DEBUG_PARAMS,
   },
   stack: {
     ...LAYOUT_PROPS,
@@ -272,6 +306,7 @@ export const ARGS: Record<string, Record<string, any>> = {
     ...SPACING_PROPS,
     ...CHILD_SIZE_PROPS,
     ...CONTAINER_PROPS,
+    ...DEBUG_PARAMS,
   },
   tile: {
     ...LAYOUT_PROPS,
@@ -281,6 +316,7 @@ export const ARGS: Record<string, Record<string, any>> = {
     ...CHILD_SIZE_PROPS,
     ...SPACING_PROPS,
     ...CONTAINER_PROPS,
+    ...DEBUG_PARAMS,
   },
 };
 

@@ -26,9 +26,9 @@ export const Default: Story = {
     layout: 'stack',
     ...ARGS.all,
     childCount: 12,
+    sizeType: 'rand',
   },
   parameters: {
-    sizeType: 'rand',
     ...CONTAINER_PARAMS,
   },
 };
@@ -42,7 +42,7 @@ export const NoSize: Story = {
   },
   parameters: {
     sizeType: 'rand',
-    randPos: true,
+    posType: 'rand',
     ...CONTAINER_PARAMS,
   },
 };

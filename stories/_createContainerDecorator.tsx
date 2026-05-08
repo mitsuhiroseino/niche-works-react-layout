@@ -40,10 +40,15 @@ export default function _createContainerDecorator(
 
   return (Story, configs: any) => {
     const { args, parameters } = configs;
-    const { sizeType, randPos, defaultLayout, defaultSize } = parameters;
-    const { layout = defaultLayout, childCount = 12, ...rest } = args;
+    const { defaultLayout, defaultSize } = parameters;
+    const {
+      layout = defaultLayout,
+      childCount = 12,
+      sizeType,
+      posType,
+      ...rest
+    } = args;
     const colors = chroma.scale(['d9ed92', '184e77']).colors(childCount);
-    console.log({ parameters, colors });
     const {
       childSizeX,
       childSizeY,
@@ -63,31 +68,33 @@ export default function _createContainerDecorator(
     const sizeProps = useMemo(() => {
       if (sizeType === 'rand') {
         return Array.from({ length: childCount }).map(() => ({
-          xHeight: _random(100),
-          xWidth: _random(200),
+          height: _random(100),
+          width: _random(200),
         }));
       } else if (sizeType === 'none') {
         return Array.from({ length: childCount }).map(() => ({}));
       } else {
         return Array.from({ length: childCount }).map(() => ({
-          xHeight: 80,
-          xWidth: 160,
+          height: 120,
+          width: 80,
         }));
       }
     }, [sizeType, childCount]);
     const positionProps = useMemo(() => {
-      if (randPos) {
+      if (posType === 'rand') {
         return Array.from({ length: childCount }).map(() => ({
           top: _random(defaultSize.height ?? 40),
           left: _random(defaultSize.width ?? 40),
         }));
+      } else if (posType === 'none') {
+        return Array.from({ length: childCount }).map(() => ({}));
       } else {
         return Array.from({ length: childCount }).map((item, index) => ({
           top: 40 * index,
           left: 40 * index,
         }));
       }
-    }, [randPos, childCount, defaultSize]);
+    }, [posType, childCount, defaultSize]);
 
     return (
       <Story
@@ -109,14 +116,15 @@ export default function _createContainerDecorator(
           }),
           children: colors.map((color, index) => {
             const childProps = {
-              ...sizeProps[index],
               style: {
+                ...sizeProps[index],
                 ...positionProps[index],
                 backgroundColor: color,
                 color: 'rgba(0, 0, 0, 0.4)',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
+                overflow: 'hidden',
               },
             };
 
