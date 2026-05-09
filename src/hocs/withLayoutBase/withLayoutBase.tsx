@@ -20,13 +20,16 @@ export default function withLayoutBase<
 >(Component: ElementType<P>, options: WithLayoutBaseOptions = {}) {
   const EnsuredComponent = ensureComponent(Component);
   const name = EnsuredComponent.displayName ?? 'unknown';
-  const { displayName = `withLayout(${name})`, ...proxyStyleOpts } = options;
+  const {
+    displayName = `withLayout(${name})`,
+    className: staticClassName,
+    ...proxyStyleOpts
+  } = options;
   /**
    * レイアウト機能を追加したコンテナー
    */
   const LayoutComponent = forwardRef<T, P & WithLayoutBaseProps>(
     (props, ref) => {
-      console.log(props);
       const { className, layout, ...rest } = props;
       const { className: clsNm, style } = createLayoutStyleBase(layout, rest);
       // restからlayout用のプロパティを削除
@@ -42,7 +45,7 @@ export default function withLayoutBase<
 
       return createElement(EnsuredComponent, {
         ref,
-        className: clsx(clsNm, className),
+        className: clsx(staticClassName, clsNm, className),
         ...containerProps,
       });
     },

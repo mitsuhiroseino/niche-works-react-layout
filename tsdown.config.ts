@@ -16,6 +16,9 @@ export default defineConfig({
   clean: true,
   outDir: 'dist',
   minify: false,
+  css: {
+    inject: true,
+  },
   inputOptions: {
     external: createExternalOptionFunction(),
   },

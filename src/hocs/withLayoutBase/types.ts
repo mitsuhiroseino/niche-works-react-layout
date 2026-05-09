@@ -14,4 +14,9 @@ export type WithLayoutBaseOptions = StyleProxyOptions & {
    * コンポーネントに設定するdisplayName
    */
   displayName?: string;
+
+  /**
+   * クラス名
+   */
+  className?: string;
 };
