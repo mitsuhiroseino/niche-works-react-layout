@@ -1,4 +1,4 @@
-import type { LooseRecord } from '@niche-works/types';
+import type { LooseDictionary } from '@niche-works/types';
 import type { ElementType } from 'react';
 import { forwardRef } from 'react';
 import pin from '../../layouts/pin';
@@ -11,7 +11,7 @@ import type { WithPinLayoutOptions, WithPinLayoutProps } from './types';
  * @param options オプション
  * @returns
  */
-export default function withPinLayout<P = LooseRecord, T = unknown>(
+export default function withPinLayout<P = LooseDictionary, T = unknown>(
   Component: ElementType<P>,
   options: WithPinLayoutOptions = {},
 ) {

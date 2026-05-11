@@ -11,8 +11,8 @@ import _applySpacing from '../_helpers/_applySpacing';
 import _hasValue from '../_helpers/_hasValue';
 import {
   clsLayoutTile,
-  varLayoutAutoTracsX,
-  varLayoutAutoTracsY,
+  varLayoutAutoTracX,
+  varLayoutAutoTracY,
   varLayoutTemplateX,
   varLayoutTemplateY,
 } from '../constants';
@@ -91,12 +91,12 @@ const _getStyleByDirection: {
         childSizeX,
         childCountX,
       ),
-      [varLayoutAutoTracsY]: _getGridClossAxisAuto(adjustY, childSizeY),
+      [varLayoutAutoTracY]: _getGridClossAxisAuto(adjustY, childSizeY),
     };
   },
   y: ({ childSizeY, alignY, childCountY, childSizeX, adjustX }) => {
     return {
-      [varLayoutAutoTracsX]: _getGridClossAxisAuto(adjustX, childSizeX),
+      [varLayoutAutoTracX]: _getGridClossAxisAuto(adjustX, childSizeX),
       [varLayoutTemplateY]: _getGridMainAxisTemplate(
         alignY,
         childSizeY,

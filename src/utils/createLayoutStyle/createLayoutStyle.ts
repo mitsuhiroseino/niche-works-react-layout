@@ -1,4 +1,4 @@
-import type { LooseRecord } from '@niche-works/types';
+import type { LooseDictionary } from '@niche-works/types';
 import * as LAYOUTS from '../../layouts';
 import createLayoutStyleBase from '../createLayoutStyleBase';
 import type { LayoutProps } from './types';
@@ -8,9 +8,9 @@ import type { LayoutProps } from './types';
  * @param props レイアウトプロパティ
  * @returns
  */
-export default function createLayoutStyle<P extends LayoutProps = LooseRecord>(
-  props: P,
-) {
+export default function createLayoutStyle<
+  P extends LayoutProps = LooseDictionary,
+>(props: P) {
   const { layout, ...rest } = props;
   return createLayoutStyleBase(LAYOUTS[layout] || LAYOUTS.stack, rest);
 }

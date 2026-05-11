@@ -1,4 +1,4 @@
-import type { LooseRecord } from '@niche-works/types';
+import type { LooseDictionary } from '@niche-works/types';
 import type { ElementType } from 'react';
 import { forwardRef } from 'react';
 import * as LAYOUTS from '../../layouts';
@@ -11,7 +11,7 @@ import type { WithLayoutOptions, WithLayoutProps } from './types';
  * @param options オプション
  * @returns
  */
-export default function withLayout<P = LooseRecord, T = unknown>(
+export default function withLayout<P = LooseDictionary, T = unknown>(
   Component: ElementType<P>,
   options: WithLayoutOptions = {},
 ) {

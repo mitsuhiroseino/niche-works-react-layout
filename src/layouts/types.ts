@@ -1,4 +1,4 @@
-import type { LooseRecord } from '@niche-works/types';
+import type { LooseDictionary } from '@niche-works/types';
 import type { CSSProperties } from 'react';
 import type {
   AlignX,
@@ -134,7 +134,7 @@ export type SpacingProps = {
 /**
  * レイアウト定義
  */
-export type LayoutDefinition<P = LooseRecord> = {
+export type LayoutDefinition<P = LooseDictionary> = {
   /**
    * レイアウト名
    */

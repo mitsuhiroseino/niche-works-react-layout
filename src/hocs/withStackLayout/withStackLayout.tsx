@@ -1,4 +1,4 @@
-import type { LooseRecord } from '@niche-works/types';
+import type { LooseDictionary } from '@niche-works/types';
 import type { ElementType } from 'react';
 import { forwardRef } from 'react';
 import stack from '../../layouts/stack';
@@ -11,7 +11,7 @@ import type { WithStackLayoutOptions, WithStackLayoutProps } from './types';
  * @param options オプション
  * @returns
  */
-export default function withStackLayout<P = LooseRecord, T = unknown>(
+export default function withStackLayout<P = LooseDictionary, T = unknown>(
   Component: ElementType<P>,
   options: WithStackLayoutOptions = {},
 ) {

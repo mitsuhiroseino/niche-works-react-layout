@@ -1,4 +1,4 @@
-import type { LooseRecord } from '@niche-works/types';
+import type { LooseDictionary } from '@niche-works/types';
 import type { ElementType } from 'react';
 import { forwardRef } from 'react';
 import balance from '../../layouts/balance';
@@ -11,7 +11,7 @@ import type { WithBalanceLayoutOptions, WithBalanceLayoutProps } from './types';
  * @param options オプション
  * @returns
  */
-export default function withBalanceLayout<P = LooseRecord, T = unknown>(
+export default function withBalanceLayout<P = LooseDictionary, T = unknown>(
   Component: ElementType<P>,
   options: WithBalanceLayoutOptions = {},
 ) {

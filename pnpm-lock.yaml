@@ -15,8 +15,8 @@ importers:
         specifier: ^0.2.0
         version: 0.2.0(react@19.2.6)
       '@niche-works/types':
-        specifier: ^0.1.0
-        version: 0.1.0
+        specifier: ^0.3.0
+        version: 0.3.0
       '@niche-works/utils':
         specifier: ^0.1.3
         version: 0.1.3
@@ -654,6 +654,9 @@ packages:
 
   '@niche-works/types@0.1.0':
     resolution: {integrity: sha512-4mAT3Iir93xoMjc7DeOGCw2/gFnSUQL0I4VbIaSyfR4JheSnE8DqZgVhxM5bll/a4gdCOQIY0hMJdgSNUMJ8dA==}
+
+  '@niche-works/types@0.3.0':
+    resolution: {integrity: sha512-4cotz/0K8lOS2qD0W46Pj0P3+qG++ZTLVj+9PREQh1kWI8VFeFPuQlmdowMdE3JB5etsb7yWA3SUIlxCyRa27Q==}
 
   '@niche-works/utils@0.1.3':
     resolution: {integrity: sha512-9gfBHMrtehRmEFnA5k1O0mXiqWkXYQt7xh1BIeqAF7WW19/2aT3Z38//84RzmVGz/yxvGrWsx93KjdgWx1ktyA==}
@@ -3516,6 +3519,10 @@ snapshots:
       tslib: 2.8.1
 
   '@niche-works/types@0.1.0':
+    dependencies:
+      type-fest: 5.6.0
+
+  '@niche-works/types@0.3.0':
     dependencies:
       type-fest: 5.6.0
 

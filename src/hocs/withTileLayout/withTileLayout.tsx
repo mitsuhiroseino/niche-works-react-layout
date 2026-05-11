@@ -1,4 +1,4 @@
-import type { LooseRecord } from '@niche-works/types';
+import type { LooseDictionary } from '@niche-works/types';
 import type { ElementType } from 'react';
 import { forwardRef } from 'react';
 import tile from '../../layouts/tile';
@@ -11,7 +11,7 @@ import type { WithTileLayoutOptions, WithTileLayoutProps } from './types';
  * @param options オプション
  * @returns
  */
-export default function withTileLayout<P = LooseRecord, T = unknown>(
+export default function withTileLayout<P = LooseDictionary, T = unknown>(
   Component: ElementType<P>,
   options: WithTileLayoutOptions = {},
 ) {

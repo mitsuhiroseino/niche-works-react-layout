@@ -200,10 +200,10 @@ export const varLayoutTemplateY = '--nwr-layout-templateY';
  * 変数\
  * 横方向のオートトラック
  */
-export const varLayoutAutoTracsX = '--nwr-layout-autoTracsX';
+export const varLayoutAutoTracX = '--nwr-layout-autoTracX';
 
 /**
  * 変数\
  * 縦方向のオートトラック
  */
-export const varLayoutAutoTracsY = '--nwr-layout-autoTracsY';
+export const varLayoutAutoTracY = '--nwr-layout-autoTracY';

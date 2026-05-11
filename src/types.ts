@@ -1,12 +1,4 @@
-import type { StyleProxyOptions } from '@niche-works/react-style-proxy';
 import type { CSSProperties, ReactNode } from 'react';
-
-export type WidthLayoutOptions = StyleProxyOptions & {
-  /**
-   * コンポーネントに設定するdisplayName
-   */
-  displayName?: string;
-};
 
 /**
  * レイアウトの共通プロパティ

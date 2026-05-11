@@ -2,8 +2,8 @@
   // 変数
   --nwr-layout-templateX: none;
   --nwr-layout-templateY: none;
-  --nwr-layout-autoTracsX: auto;
-  --nwr-layout-autoTracsY: auto;
+  --nwr-layout-autoTracX: auto;
+  --nwr-layout-autoTracY: auto;
   --nwr-layout-spacingX: 0px;
   --nwr-layout-spacingY: 0px;
   --nwr-layout-childSizeX: auto;
@@ -26,13 +26,13 @@
   &.nwr-layout-direction-x {
     grid-auto-flow: row;
     grid-template-columns: var(--nwr-layout-templateX);
-    grid-auto-rows: var(--nwr-layout-autoTracsY);
+    grid-auto-rows: var(--nwr-layout-autoTracY);
   }
 
   // 縦並び
   &.nwr-layout-direction-y {
     grid-auto-flow: column;
-    grid-auto-columns: var(--nwr-layout-autoTracsX);
+    grid-auto-columns: var(--nwr-layout-autoTracX);
     grid-template-rows: var(--nwr-layout-templateY);
   }
 
