@@ -176,22 +176,22 @@ const PinContainer = withPinLayout(Container);
 
 ### Option List
 
-| Option         | Type         | Description                                   |
-| -------------- | ------------ | --------------------------------------------- | --------------------------------------------------------- |
-| `direction?`   | `'x'         | 'y'`                                          | Direction of the main axis                                |
-| `alignX?`      | [`AlignX`]() | Horizontal alignment of child elements        |
-| `alignY?`      | [`AlignY`]() | Vertical alignment of child elements          |
-| `adjustX?`     | [`Adjust`]() | Horizontal size adjustment for child elements |
-| `adjustY?`     | [`Adjust`]() | Vertical size adjustment for child elements   |
-| `spacing?`     | `string      | number`                                       | Gap between child elements (both horizontal and vertical) |
-| `spacingX?`    | `string      | number`                                       | Horizontal gap between child elements                     |
-| `spacingY?`    | `string      | number`                                       | Vertical gap between child elements                       |
-| `childSizeX?`  | `string      | number`                                       | Width of child elements                                   |
-| `childSizeY?`  | `string      | number`                                       | Height of child elements                                  |
-| `childCountX?` | `number`     | Number of child elements horizontally         |
-| `childCountY?` | `number`     | Number of child elements vertically           |
-| `childX?`      | `(string     | number)[]`                                    | Individual horizontal sizes for each child element        |
-| `childY?`      | `(string     | number)[]`                                    | Individual vertical sizes for each child element          |
+| Option         | Type                   | Description                                               |
+| -------------- | ---------------------- | --------------------------------------------------------- |
+| `direction?`   | `'x' \| 'y'`           | Direction of the main axis                                |
+| `alignX?`      | [`AlignX`]()           | Horizontal alignment of child elements                    |
+| `alignY?`      | [`AlignY`]()           | Vertical alignment of child elements                      |
+| `adjustX?`     | [`Adjust`]()           | Horizontal size adjustment for child elements             |
+| `adjustY?`     | [`Adjust`]()           | Vertical size adjustment for child elements               |
+| `spacing?`     | `string \| number`     | Gap between child elements (both horizontal and vertical) |
+| `spacingX?`    | `string \| number`     | Horizontal gap between child elements                     |
+| `spacingY?`    | `string \| number`     | Vertical gap between child elements                       |
+| `childSizeX?`  | `string \| number`     | Width of child elements                                   |
+| `childSizeY?`  | `string \| number`     | Height of child elements                                  |
+| `childCountX?` | `number`               | Number of child elements horizontally                     |
+| `childCountY?` | `number`               | Number of child elements vertically                       |
+| `childX?`      | `(string \| number)[]` | Individual horizontal sizes for each child element        |
+| `childY?`      | `(string \| number)[]` | Individual vertical sizes for each child element          |
 
 ### `Adjust` Values
 
