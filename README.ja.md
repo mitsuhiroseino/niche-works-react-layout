@@ -1,223 +1,212 @@
 # @niche-works/react-layout
 
-`@niche-works/react-layout` は、React コンポーネントにレイアウト機能を追加するニッチなライブラリです。\
-子要素の配置方法を制御し、統一されたレイアウトを適用できます。
+`@niche-works/react-layout` は、CSSによる子要素のレイアウト制御に特化したニッチなライブラリです。\
+プロパティに応じたクラス名とCSS変数を自動的に設定するHOCを提供します。
 
 **[English README is available here](./README.md)**
 
 ## インストール
 
-```sh
+```bash
 npm install @niche-works/react-layout
+# または
+pnpm add @niche-works/react-layout
 ```
 
 ## 使い方
 
-```tsx
-import { withLayout } from '@niche-works/react-layout';
+任意のコンポーネントをHOCに渡すことで、レイアウト機能の適用されたコンポーネントを作成することができます。
 
-const LayoutDiv = withLayout('div');
+```ts
+import { withStackLayout } from '@niche-works/react-layout';
 
-export default function App() {
-  return (
-    <LayoutDiv layout="stack" orientation="horizontal" scroll>
-      <div>Item 1</div>
-      <div>Item 2</div>
-      <div>Item 3</div>
-    </LayoutDiv>
-  );
-}
+// ※ classNameやstyle（CSS変数用）を透過するコンポーネントである必要があります
+const MyContainer = (props: React.ComponentProps<'div'>) => <div {...props} />;
+
+const StackContainer = withStackLayout(MyContainer);
 ```
 
-## API
+```tsx
+<StackContainer>
+  <div>Item 1</div>
+  <div>Item 2</div>
+</StackContainer>
+```
 
-### `withLayout(Component, options?)`
+## レイアウト種別
 
-#### 引数
+### `stack`
 
-- `Component`: レイアウトを適用する対象の React コンポーネント。
-- `options`: `WithLayoutOptions` 型のオプション（省略可）。
+子要素を縦または横方向に一列に並べます。
 
-#### `WithLayoutOptions`
+```tsx
+import { withStackLayout } from '@niche-works/react-layout';
 
-| プロパティ        | 型                                         | 説明                                                                                        |
-| ----------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------- |
-| `styleProp?`      | `'style'` \| `'css'` \| `'sx'` \| `string` | レイアウト用スタイルを適用するプロパティ（デフォルト: `style`）                             |
-| `styleApplyMode?` | `'merge'` \| `'append'`                    | `styleProp` に既存のスタイルがある場合の適用方法（デフォルト: `merge`）                     |
-| `displayName?`    | `string`                                   | 作成するコンポーネントの`displayName`（デフォルト: `withLayout(${Component.displayName})`） |
+const StackContainer = withStackLayout(Container);
 
-#### 戻り値
+// ----------------------
 
-レイアウト機能が追加された新しいコンポーネントを返します。
+<StackContainer
+  direction="x"
+  alignX="left"
+  alignY="top"
+  adjustX="grow"
+  childSizeX="200px"
+  spacing="8px"
+/>;
+```
 
-## `LayoutProps`
+### `flow`
 
-戻り値のコンポーネントに渡せるプロパティです。`layout` の値に応じて適用可能なプロパティが変化します。
+`stack`と同様ですが、コンテナサイズを超えた場合に子要素を折り返します。
 
-### 共通プロパティ
+```tsx
+import { withFlowLayout } from '@niche-works/react-layout';
 
-| プロパティ    | 型                                                                    | 説明                                                           |
-| ------------- | --------------------------------------------------------------------- | -------------------------------------------------------------- |
-| `layout`      | `'balance'` \|`'tile'` \|`'pack'` \|`'matrix'` \| `'pin'` \|`'stack'` | レイアウトの種類。値によって設定可能なプロパティが変化します。 |
-| `scroll?`     | `boolean`                                                             | スクロールの有無（デフォルト: `false`）                        |
-| `childStyle?` | `CSSProperties`                                                       | 子要素に適用するスタイル                                       |
-| `children`    | `ReactNode`                                                           | 子要素。                                                       |
+const FlowContainer = withFlowLayout(Container);
 
-### 各レイアウトのプロパティ
+// ----------------------
 
-#### `balance`
+<FlowContainer
+  direction="x"
+  alignX="left"
+  alignY="top"
+  adjustX="grow"
+  childSizeX="200px"
+  spacing="8px"
+/>;
+```
 
-子要素を一列均等に配置します。  
-`stack`との主な違いは子要素が親要素のサイズを下回った時には余白が設定されることと、  
-`alignVertical`が`middle`や`alignHorizontal`が`center`の時に子要素が親要素のサイズを上回っても子要素の上や左の端が表示される点です。
+> 交差軸方向の `adjust` に `grow`、`shrink`、`fit` は指定できません。
 
-| プロパティ           | 型                                | 説明                                             |
-| -------------------- | --------------------------------- | ------------------------------------------------ |
-| `layout`             | `'balance'`                       |                                                  |
-| `orientation`        | [整列方向](#整列方向)参照         | 子要素を並べる方向（デフォルト: `'horizontal'`） |
-| `alignHorizontal?`   | [横位置](#横位置)参照             | 水平方向の配置（デフォルト: `'left'`）           |
-| `alignVertical?`     | [縦位置](#縦位置)参照             | 子要素の縦方向の配置（デフォルト: `'top'`）      |
-| `sizeHorizontal?`    | `number`                          | 子要素の幅                                       |
-| `sizeVertical?`      | `number`                          | 子要素の高さ                                     |
-| `adjustHorizontal?`  | [サイズの調整](#サイズの調整)参照 | 水平方向のサイズ調整                             |
-| `adjustVertical?`    | [サイズの調整](#サイズの調整)参照 | 垂直方向のサイズ調整                             |
-| `spacingAll?`        | `number`                          | 子要素の余白                                     |
-| `spacingHorizontal?` | `number`                          | 子要素の左右の余白                               |
-| `spacingVertical?`   | `number`                          | 子要素の上下の余白                               |
+### `matrix`
 
-#### `matrix`
+列数・行数を指定して子要素を格子状に並べます。
 
-子要素を格子状に配置します。  
-子要素の縦、横方向の数が指定されている場合は要素数を制限します。
+```tsx
+import { withMatrixLayout } from '@niche-works/react-layout';
 
-| プロパティ            | 型                                 | 説明                                                                    |
-| --------------------- | ---------------------------------- | ----------------------------------------------------------------------- |
-| `layout`              | `'matrix'`                         |                                                                         |
-| `sizeHorizontal?`     | `number`                           | 子要素の幅                                                              |
-| `sizeVertical?`       | `number`                           | 子要素の高さ                                                            |
-| `spacingAll?`         | `number`                           | 子要素の余白                                                            |
-| `spacingHorizontal?`  | `number`                           | 子要素の左右の余白                                                      |
-| `spacingVertical?`    | `number`                           | 子要素の上下の余白                                                      |
-| `countHorizontal?`    | `number`                           | 子要素の横方向の数                                                      |
-| `countVertical?`      | `number`                           | 子要素の縦方向の数                                                      |
-| `templateHorizontal?` | `string` \| `(string \| number)[]` | CSS の `grid-template-columns` 形式、またはカラムごとの幅を指定した配列 |
-| `templateVertical?`   | `string` \| `(string \| number)[]` | CSS の `grid-template-rows` 形式、または行ごとの高さを指定した配列      |
+const MatrixContainer = withMatrixLayout(Container);
 
-#### `pack`
+// ----------------------
 
-子要素を親要素の高さと幅に合わせます。
+<MatrixContainer
+  direction="x"
+  childCountX={3}
+  childY={[200, 100, '1fr']}
+  childSizeX="200px"
+  adjustX="fit"
+  spacing="8px"
+/>;
+```
 
-| プロパティ           | 型                        | 説明                                             |
-| -------------------- | ------------------------- | ------------------------------------------------ |
-| `layout`             | `'pack'`                  |                                                  |
-| `orientation`        | [整列方向](#整列方向)参照 | 子要素を並べる方向（デフォルト: `'horizontal'`） |
-| `spacingAll?`        | `number`                  | 要素間の余白                                     |
-| `spacingHorizontal?` | `number`                  | 水平方向の余白                                   |
-| `spacingVertical?`   | `number`                  | 垂直方向の余白                                   |
+各軸で `childCount` または `child` のどちらか一方が必須です（両方は指定不可）。
 
-#### `pin`
+> **注意:** このレイアウトはコンテナのサイズが外部から確定していることを前提としています。`width: max-content` など、子要素によってサイズが決まる親要素では、パーセンテージ値が意図通りに動作しない場合があります。
 
-各子要素に設定されたスタイル(`top`,`bottom`,`left`,`right`)に従い、子要素を絶対位置で配置します。
+### `tile`
 
-| プロパティ        | 型       | 説明         |
-| ----------------- | -------- | ------------ |
-| `layout`          | `'pin'`  |              |
-| `sizeHorizontal?` | `number` | 子要素の幅   |
-| `sizeVertical?`   | `number` | 子要素の高さ |
+子要素のサイズを基準にして格子状に並べます。列数は親要素のサイズと子要素のサイズに応じて自動で決まります。
 
-#### `stack`
+```tsx
+import { withTileLayout } from '@niche-works/react-layout';
 
-子要素を一列に配置します。
-`balance`との主な違いは子要素が親要素のサイズを下回ったても余白がされないことと、  
-`alignVertical`が`middle`や`alignHorizontal`が`center`の時に子要素が親要素のサイズを上回ると子要素の上や左の端が表示されなくなる点です。
+const TileContainer = withTileLayout(Container);
 
-| プロパティ           | 型                                | 説明                                             |
-| -------------------- | --------------------------------- | ------------------------------------------------ |
-| `layout`             | `'stack'`                         |                                                  |
-| `orientation`        | [整列方向](#整列方向)参照         | 子要素を並べる方向（デフォルト: `'horizontal'`） |
-| `alignHorizontal?`   | [横位置](#横位置)参照             | 水平方向の配置（デフォルト: `'left'`）           |
-| `alignVertical?`     | [縦位置](#縦位置)参照             | 子要素の縦方向の配置（デフォルト: `'top'`）      |
-| `sizeHorizontal?`    | `number`                          | 子要素の幅                                       |
-| `sizeVertical?`      | `number`                          | 子要素の高さ                                     |
-| `adjustHorizontal?`  | [サイズの調整](#サイズの調整)参照 | 水平方向のサイズ調整                             |
-| `adjustVertical?`    | [サイズの調整](#サイズの調整)参照 | 垂直方向のサイズ調整                             |
-| `spacingAll?`        | `number`                          | 要素間の余白                                     |
-| `spacingHorizontal?` | `number`                          | 水平方向の余白                                   |
-| `spacingVertical?`   | `number`                          | 垂直方向の余白                                   |
+// ----------------------
 
-#### `tile` （子要素を親要素のサイズに合わせて格子状に並べる）
+<TileContainer direction="x" childSizeX="200px" adjustX="fit" spacing="8px" />;
+```
 
-子要素を親要素のサイズに合わせて格子状に並べます。  
-親要素の`orientation`の方向のサイズを子要素が超えた場合には折り返されます。
+> **注意:** `matrix` と同様に、コンテナのサイズが外部から確定していることを前提としています。
 
-| プロパティ           | 型                                | 説明                                                         |
-| -------------------- | --------------------------------- | ------------------------------------------------------------ |
-| `layout`             | `'tile'`                          |                                                              |
-| `orientation`        | [整列方向](#整列方向)参照         | 子要素を並べる方向（デフォルト: `'horizontal'`）             |
-| `alignHorizontal?`   | [横位置](#横位置)参照             | 水平方向の配置（デフォルト: `'left'`）                       |
-| `alignVertical?`     | [縦位置](#縦位置)参照             | 子要素の縦方向の配置（デフォルト: `'top'`）                  |
-| `sizeHorizontal?`    | `number`                          | 子要素の幅                                                   |
-| `sizeVertical?`      | `number`                          | 子要素の高さ                                                 |
-| `adjustHorizontal?`  | [サイズの調整](#サイズの調整)参照 | 水平方向のサイズ調整(`orientation='horizontal'`の場合は無効) |
-| `adjustVertical?`    | [サイズの調整](#サイズの調整)参照 | 垂直方向のサイズ調整(`orientation='vertical'`の場合は無効)   |
-| `spacingAll?`        | `number`                          | 子要素の余白                                                 |
-| `spacingHorizontal?` | `number`                          | 子要素の左右の余白                                           |
-| `spacingVertical?`   | `number`                          | 子要素の上下の余白                                           |
+### `balance`
 
-## プロパティ値
+子要素を一列に均等に並べます。
 
-### 整列方向
+- `adjust` なし: 子要素のサイズを維持したまま、余白を均等に配分します
+- `adjust` あり: 子要素のサイズを調整してコンテナを満たします
 
-子要素を並べる方向を指定します。
+```tsx
+import { withBalanceLayout } from '@niche-works/react-layout';
 
-| 値             | 説明                   |
-| -------------- | ---------------------- |
-| `'horizontal'` | 子要素を横方向に並べる |
-| `'vertical'`   | 子要素を縦方向に並べる |
+const BalanceContainer = withBalanceLayout(Container);
 
-### 横位置
+// ----------------------
 
-子要素の横の位置を指定します。
-基本的には親要素の枠を基準とした位置ですが、
-一部のレイアウトは個々の子要素を配置した領域を基準とします。
+<BalanceContainer
+  direction="x"
+  adjustX="grow"
+  childSizeX="200px"
+  spacing="8px"
+/>;
+```
 
-| 値                | 説明                   |
-| ----------------- | ---------------------- |
-| `'left'`          | 左寄せ                 |
-| `'center'`        | 中央配置               |
-| `'right'`         | 右寄せ                 |
-| `'space-between'` | 要素間の余白を均等配置 |
-| `'space-around'`  | 両端に余白を追加       |
-| `'space-evenly'`  | すべての余白を均等配置 |
-| `'fit'`           | 親要素に合わせて伸縮   |
+### `pack`
 
-### 縦位置
+子要素を親要素のサイズに合わせて均等にサイズ調整し並べます。
 
-子要素の縦の位置を指定します。
-基本的には親要素の枠を基準とした位置ですが、
-一部のレイアウトは個々の子要素を配置した領域を基準とします。
+```tsx
+import { withPackLayout } from '@niche-works/react-layout';
 
-| 値                | 説明                   |
-| ----------------- | ---------------------- |
-| `'top'`           | 上寄せ                 |
-| `'middle'`        | 中央配置               |
-| `'bottom'`        | 下寄せ                 |
-| `'space-between'` | 要素間の余白を均等配置 |
-| `'space-around'`  | 両端に余白を追加       |
-| `'space-evenly'`  | すべての余白を均等配置 |
-| `'fit'`           | 親要素に合わせて伸縮   |
+const PackContainer = withPackLayout(Container);
 
-### サイズの調整
+// ----------------------
 
-子要素が親用のサイズに満たない場合、または超える場合に子要素のサイズを調整する方法を指定します。
-子要素を常に親要素のサイズに合わせたい場合は当プロパティではなく、  
-[縦位置](#縦位置)または[横位置](#横位置)を`'fit'`に設定することで対応できます。
+<PackContainer direction="x" spacing="8px" />;
+```
 
-| 値         | 説明                       |
-| ---------- | -------------------------- |
-| `'none'`   | 調整しない                 |
-| `'expand'` | 親要素を満たすように広げる |
-| `'narrow'` | 親要素に収まるように狭める |
+### `pin`
+
+子要素を指定の座標に配置します。子要素は `top` / `left` / `bottom` / `right` スタイルで位置を指定してください。
+
+```tsx
+import { withPinLayout } from '@niche-works/react-layout';
+
+const PinContainer = withPinLayout(Container);
+
+// ----------------------
+
+<PinContainer childSizeX="100px" childSizeY="80px" />;
+```
+
+## オプション
+
+### オプション一覧
+
+| オプション     | 型                       | 説明                         |
+| -------------- | ------------------------ | ---------------------------- |
+| `direction?`   | `'x' \| 'y'`             | 主軸の方向                   |
+| `alignX?`      | [`AlignX`](#alignx-の値) | 子要素の横位置               |
+| `alignY?`      | [`AlignY`](#aligny-の値) | 子要素の縦位置               |
+| `adjustX?`     | [`Adjust`](#adjust-の値) | 子要素の横方向のサイズ調整   |
+| `adjustY?`     | [`Adjust`](#adjust-の値) | 子要素の縦方向のサイズ調整   |
+| `spacing?`     | `string \| number`       | 子要素間の余白（横縦共通）   |
+| `spacingX?`    | `string \| number`       | 子要素間の余白（横方向）     |
+| `spacingY?`    | `string \| number`       | 子要素間の余白（縦方向）     |
+| `childSizeX?`  | `string \| number`       | 子要素の幅                   |
+| `childSizeY?`  | `string \| number`       | 子要素の高さ                 |
+| `childCountX?` | `number`                 | 子要素の横方向の数           |
+| `childCountY?` | `number`                 | 子要素の縦方向の数           |
+| `childX?`      | `(string \| number)[]`   | 子要素の横方向の個々のサイズ |
+| `childY?`      | `(string \| number)[]`   | 子要素の縦方向の個々のサイズ |
+
+### `Adjust` の値
+
+| 値       | 子が親より小さい時 | 子が親より大きい時 |
+| -------- | ------------------ | ------------------ |
+| `none`   | そのまま           | そのまま           |
+| `grow`   | 伸びる             | そのまま           |
+| `shrink` | そのまま           | 縮む               |
+| `fit`    | 伸びる             | 縮む               |
+
+### `AlignX` の値
+
+`'left'` | `'center'` | `'right'` | `'space-between'` | `'space-around'` | `'space-evenly'`
+
+### `AlignY` の値
+
+`'top'` | `'middle'` | `'bottom'` | `'space-between'` | `'space-around'` | `'space-evenly'`
 
 ## ライセンス
 

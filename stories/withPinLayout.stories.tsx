@@ -1,21 +1,22 @@
 /** @jsxImportSource @emotion/react */
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import type { WithPinLayoutProps } from '../src/hocs/withPinLayout';
-import withPinLayout from '../src/hocs/withPinLayout';
-import _createContainerDecorator from './_createContainerDecorator';
-import _createResizableContainer from './_createResizableContainer';
+import type { WithPinLayoutProps } from '../src/withPinLayout';
+import withPinLayout from '../src/withPinLayout';
+import createContainerDecorator from './_internal/createContainerDecorator';
+import createResizableContainer from './_internal/createResizableContainer';
 import type { BoxProps } from './Box';
 import Box from './Box';
-import { ARGS, ARG_TYPES, CONTAINER_PARAMS } from './constants';
+import { ARGS, ARG_TYPES } from './constants';
 
-const ResizableContainer = _createResizableContainer(
+const ResizableContainer = createResizableContainer(
   withPinLayout<BoxProps & WithPinLayoutProps, HTMLDivElement>(Box),
 );
 const meta = {
   title: 'withPinLayout',
   component: ResizableContainer,
   tags: ['layout'],
-  decorators: _createContainerDecorator(),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  decorators: createContainerDecorator() as any,
 } satisfies Meta<typeof ResizableContainer>;
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -26,5 +27,4 @@ export const Default: Story = {
     ...ARGS.pin,
     childCount: 12,
   },
-  parameters: CONTAINER_PARAMS,
 };

@@ -1,61 +1,41 @@
 /** @jsxImportSource @emotion/react */
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import type { WithLayoutProps } from '../src/hocs/withLayout';
-import withLayout from '../src/hocs/withLayout';
-import _createContainerDecorator from './_createContainerDecorator';
-import _createResizableContainer from './_createResizableContainer';
+import type { WithLayoutProps } from '../src/withLayout';
+import withLayout from '../src/withLayout';
+import createContainerDecorator from './_internal/createContainerDecorator';
+import createResizableContainer from './_internal/createResizableContainer';
 import type { BoxProps } from './Box';
 import Box from './Box';
-import { ARGS, ARG_TYPES, CONTAINER_PARAMS } from './constants';
+import { ARGS, ARG_TYPES } from './constants';
 
-const ResizableContainer = _createResizableContainer(
+const ResizableContainer = createResizableContainer(
   withLayout<BoxProps & WithLayoutProps, HTMLDivElement>(Box),
 );
 const meta = {
   title: 'withLayout',
   component: ResizableContainer,
   tags: ['layout'],
-  decorators: _createContainerDecorator(),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  decorators: createContainerDecorator() as any,
 } satisfies Meta<typeof ResizableContainer>;
 export default meta;
 type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {
-  argTypes: ARG_TYPES.all,
-  args: {
-    layout: 'stack',
-    ...ARGS.all,
-    childCount: 12,
-    sizeType: 'rand',
-  },
-  parameters: {
-    ...CONTAINER_PARAMS,
-  },
-};
-
-export const NoSize: Story = {
-  argTypes: ARG_TYPES.nosize,
-  args: {
-    layout: 'stack',
-    ...ARGS.nosize,
-    childCount: 12,
-  },
-  parameters: {
-    sizeType: 'rand',
-    posType: 'rand',
-    ...CONTAINER_PARAMS,
-  },
-};
 
 export const Balance: Story = {
   argTypes: ARG_TYPES.balance,
   args: {
     ...ARGS.balance,
+    layout: 'balance',
     childCount: 12,
   },
-  parameters: {
-    defaultLayout: 'balance',
-    ...CONTAINER_PARAMS,
+};
+
+export const Flow: Story = {
+  argTypes: ARG_TYPES.flow,
+  args: {
+    ...ARGS.flow,
+    layout: 'flow',
+    childCount: 12,
   },
 };
 
@@ -63,12 +43,9 @@ export const Pack: Story = {
   argTypes: ARG_TYPES.pack,
   args: {
     ...ARGS.pack,
-    childCount: 12,
-  },
-  parameters: {
-    defaultLayout: 'pack',
+    layout: 'pack',
     sizeType: 'none',
-    ...CONTAINER_PARAMS,
+    childCount: 12,
   },
 };
 
@@ -76,11 +53,8 @@ export const Matrix: Story = {
   argTypes: ARG_TYPES.matrix,
   args: {
     ...ARGS.matrix,
+    layout: 'matrix',
     childCount: 12,
-  },
-  parameters: {
-    defaultLayout: 'matrix',
-    ...CONTAINER_PARAMS,
   },
 };
 
@@ -88,11 +62,8 @@ export const Pin: Story = {
   argTypes: ARG_TYPES.pin,
   args: {
     ...ARGS.pin,
+    layout: 'pin',
     childCount: 12,
-  },
-  parameters: {
-    defaultLayout: 'pin',
-    ...CONTAINER_PARAMS,
   },
 };
 
@@ -100,11 +71,8 @@ export const Stack: Story = {
   argTypes: ARG_TYPES.stack,
   args: {
     ...ARGS.stack,
+    layout: 'stack',
     childCount: 12,
-  },
-  parameters: {
-    defaultLayout: 'stack',
-    ...CONTAINER_PARAMS,
   },
 };
 
@@ -112,10 +80,7 @@ export const Tile: Story = {
   argTypes: ARG_TYPES.tile,
   args: {
     ...ARGS.tile,
+    layout: 'tile',
     childCount: 12,
-  },
-  parameters: {
-    defaultLayout: 'tile',
-    ...CONTAINER_PARAMS,
   },
 };

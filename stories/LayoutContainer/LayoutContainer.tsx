@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import withLayout from '../../src/hocs/withLayout';
+import withLayout from '../../src/withLayout';
 import Box from '../Box';
 import type { LayoutContainerProps } from './types';
 

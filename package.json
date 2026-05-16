@@ -1,6 +1,6 @@
 {
   "name": "@niche-works/react-layout",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "private": true,
   "keywords": [
     "react",
@@ -37,10 +37,11 @@
     "tidy": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json}\" --config ./prettier.tidy.config.ts"
   },
   "dependencies": {
+    "@niche-works/css-layouts": "^0.2.0",
     "@niche-works/react": "^0.1.0",
     "@niche-works/react-style-proxy": "^0.2.0",
     "@niche-works/types": "^0.3.0",
-    "@niche-works/utils": "^0.1.3",
+    "@niche-works/utils": "^0.4.0",
     "clsx": "^2.1.1",
     "tslib": "^2.8.1"
   },
@@ -92,7 +93,7 @@
     "sass": "^1.99.0",
     "sass-embedded": "^1.99.0",
     "storybook": "^10.3.5",
-    "tsdown": "^0.21.9",
+    "tsdown": "^0.22.0",
     "tsx": "^4.21.0",
     "typescript": "^6.0.2",
     "typescript-eslint": "^8.58.2",

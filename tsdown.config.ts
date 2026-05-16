@@ -37,18 +37,23 @@ export default defineConfig({
             import: './index.mjs',
             require: './index.cjs',
           },
-          './layouts': {
-            import: './layouts/types.mjs',
-            require: './layouts/types.cjs',
+          './*': {
+            import: './*/index.mjs',
+            require: './*/index.cjs',
           },
-          './hocs/*': {
-            import: './hocs/*/index.mjs',
-            require: './hocs/*/index.cjs',
+          './constants': {
+            import: './constants.mjs',
+            require: './constants.cjs',
           },
-          './utils/*': {
-            import: './hocs/*/index.mjs',
-            require: './hocs/*/index.cjs',
+          './core/*': {
+            import: './core/*/index.mjs',
+            require: './core/*/index.cjs',
           },
+          './core/constants': {
+            import: './core/constants.mjs',
+            require: './core/constants.cjs',
+          },
+          './*.css': './core/*.css',
         },
       },
     }),

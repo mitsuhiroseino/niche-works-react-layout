@@ -1,31 +1,32 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
+  Adjust,
   AlignX,
   AlignY,
   Direction,
-  LayoutAdjust,
-  LayoutType,
-} from '@niche-works/react-layout';
-import type {
-  AdjustProps,
-  AlignProps,
-  ChildSizeProps,
-  DirectionProps,
-  SpacingProps,
-} from '@niche-works/react-layout/layouts';
-import type { StyleProps } from '@niche-works/react-style-props';
+} from '@niche-works/css-layouts/constants';
 import type { ArgTypes } from '@storybook/react-vite';
-import type { LayoutUtilOptionsBase } from '../src/types';
+import { LayoutType } from '../src/constants';
+import type {
+  AdjustOptions,
+  AlignOptions,
+  ChildCountOptions,
+  ChildOptions,
+  ChildSizeOptions,
+  DebugOptions,
+  DirectionOptions,
+  SpacingOptions,
+} from './types';
 
 export const LAYOUT_OPTIONS = Object.values(LayoutType);
 
-export const DIRECTION_OPTIONS = Object.values(Direction);
+export const DIRECTION_ARG_OPTIONS = Object.values(Direction);
 
-export const ALAGN_X_OPTIONS = Object.values(AlignX);
+export const ALAGN_X_ARG_OPTIONS = Object.values(AlignX);
 
-export const ALAGN_Y_OPTIONS = Object.values(AlignY);
+export const ALAGN_Y_ARG_OPTIONS = Object.values(AlignY);
 
-export const LAYOUT_ADJUST_OPTIONS = Object.values(LayoutAdjust);
+export const ADJUST_ARG_OPTIONS = Object.values(Adjust);
 
 export const LAYOUT_ARG_TYPES: ArgTypes = {
   layout: {
@@ -35,84 +36,112 @@ export const LAYOUT_ARG_TYPES: ArgTypes = {
   scroll: { type: 'boolean' },
 };
 
-export const DIRECTION_ARG_TYPES: ArgTypes = {
+export const DIRECTION_ARG_TYPES: ArgTypes<DirectionOptions> = {
   direction: {
-    control: { type: 'select' },
-    options: DIRECTION_OPTIONS,
+    control: 'select',
+    options: DIRECTION_ARG_OPTIONS,
   },
 };
 
-export const ALIGN_ARG_TYPES: ArgTypes = {
+export const ALIGN_ARG_TYPES: ArgTypes<AlignOptions> = {
   alignX: {
-    control: { type: 'select' },
-    options: ALAGN_X_OPTIONS,
+    control: 'select',
+    options: ALAGN_X_ARG_OPTIONS,
   },
   alignY: {
-    control: { type: 'select' },
-    options: ALAGN_Y_OPTIONS,
+    control: 'select',
+    options: ALAGN_Y_ARG_OPTIONS,
   },
 };
 
-export const ADJUST_ARG_TYPES: ArgTypes = {
+export const ADJUST_ARG_TYPES: ArgTypes<AdjustOptions> = {
   adjustX: {
-    control: { type: 'select' },
-    options: LAYOUT_ADJUST_OPTIONS,
+    control: 'select',
+    options: ADJUST_ARG_OPTIONS,
   },
   adjustY: {
-    control: { type: 'select' },
-    options: LAYOUT_ADJUST_OPTIONS,
+    control: 'select',
+    options: ADJUST_ARG_OPTIONS,
   },
 };
 
-export const CHILD_SIZE_ARG_TYPES: ArgTypes = {
+export const ADJUST_DIRECTION_X_ARG_TYPES: ArgTypes<AdjustOptions> = {
+  adjustX: {
+    control: 'select',
+    options: ADJUST_ARG_OPTIONS,
+  },
+  adjustY: {
+    control: 'select',
+    options: ['none'],
+  },
+};
+
+export const ADJUST_DIRECTION_Y_ARG_TYPES: ArgTypes<AdjustOptions> = {
+  adjustX: {
+    control: 'select',
+    options: ['none'],
+  },
+  adjustY: {
+    control: 'select',
+    options: ADJUST_ARG_OPTIONS,
+  },
+};
+
+export const CHILD_SIZE_ARG_TYPES: ArgTypes<ChildSizeOptions> = {
   childSizeX: {
-    type: 'string',
+    control: 'text',
   },
   childSizeY: {
-    type: 'string',
+    control: 'text',
   },
 };
 
-export const SPACING_ARG_TYPES: ArgTypes = {
+export const SPACING_ARG_TYPES: ArgTypes<SpacingOptions> = {
   spacing: {
-    type: 'string',
+    control: 'text',
   },
   spacingX: {
-    type: 'string',
+    control: 'text',
   },
   spacingY: {
-    type: 'string',
+    control: 'text',
   },
 };
 
-export const CHILD_COUNT_ARG_TYPES: ArgTypes = {
+export const CHILD_COUNT_ARG_TYPES: ArgTypes<ChildCountOptions> = {
   childCountX: {
-    type: 'string',
+    control: 'text',
   },
   childCountY: {
-    type: 'string',
+    control: 'text',
   },
 };
 
-export const GRID_TEMPLATE_ARG_TYPES: ArgTypes = {
-  templateX: {
-    type: 'string',
+export const CHILD_ARG_TYPES: ArgTypes<ChildOptions> = {
+  childX: {
+    control: 'text',
   },
-  templateY: {
-    type: 'string',
+  childY: {
+    control: 'text',
   },
 };
 
-export const DEBUG_ARG_TYPES: ArgTypes = {
+export const DEBUG_ARG_TYPES: ArgTypes<DebugOptions> = {
+  containerWidth: {
+    control: 'text',
+  },
+  containerHeight: {
+    control: 'text',
+  },
   childCount: {
     type: 'number',
   },
   sizeType: {
-    control: { type: 'select' },
+    control: 'select',
     options: ['none', 'rand', 'static'],
   },
   posType: {
-    control: { type: 'select' },
+    control: 'select',
     options: ['none', 'rand', 'static'],
   },
 };
@@ -123,10 +152,10 @@ export const ARG_TYPES = {
     ...DIRECTION_ARG_TYPES,
     ...ALIGN_ARG_TYPES,
     ...ADJUST_ARG_TYPES,
-    ...CHILD_SIZE_ARG_TYPES,
     ...SPACING_ARG_TYPES,
+    ...CHILD_SIZE_ARG_TYPES,
     ...CHILD_COUNT_ARG_TYPES,
-    ...GRID_TEMPLATE_ARG_TYPES,
+    ...CHILD_ARG_TYPES,
     ...DEBUG_ARG_TYPES,
   },
   nosize: {
@@ -136,7 +165,7 @@ export const ARG_TYPES = {
     ...ADJUST_ARG_TYPES,
     ...SPACING_ARG_TYPES,
     ...CHILD_COUNT_ARG_TYPES,
-    ...GRID_TEMPLATE_ARG_TYPES,
+    ...CHILD_ARG_TYPES,
     ...DEBUG_ARG_TYPES,
   },
   balance: {
@@ -147,10 +176,21 @@ export const ARG_TYPES = {
     ...CHILD_SIZE_ARG_TYPES,
     ...DEBUG_ARG_TYPES,
   },
+  flow: {
+    ...DIRECTION_ARG_TYPES,
+    ...ALIGN_ARG_TYPES,
+    ...ADJUST_ARG_TYPES,
+    ...CHILD_SIZE_ARG_TYPES,
+    ...SPACING_ARG_TYPES,
+    ...CHILD_COUNT_ARG_TYPES,
+    ...DEBUG_ARG_TYPES,
+  },
   matrix: {
     ...DIRECTION_ARG_TYPES,
+    ...ALIGN_ARG_TYPES,
+    ...ADJUST_ARG_TYPES,
     ...SPACING_ARG_TYPES,
-    ...GRID_TEMPLATE_ARG_TYPES,
+    ...CHILD_ARG_TYPES,
     ...CHILD_COUNT_ARG_TYPES,
     ...CHILD_SIZE_ARG_TYPES,
     ...DEBUG_ARG_TYPES,
@@ -178,63 +218,49 @@ export const ARG_TYPES = {
     ...ALIGN_ARG_TYPES,
     ...ADJUST_ARG_TYPES,
     ...SPACING_ARG_TYPES,
-    ...CHILD_COUNT_ARG_TYPES,
     ...CHILD_SIZE_ARG_TYPES,
     ...DEBUG_ARG_TYPES,
   },
 } as const;
 
-export const LAYOUT_PROPS: LayoutUtilOptionsBase = {
-  scroll: true,
-};
-
-export const DIRECTION_PROPS: DirectionProps = {
+export const DIRECTION_OPTIONS: DirectionOptions = {
   direction: 'x',
 };
 
-export const ALIGN_PROPS: AlignProps = {
+export const ALIGN_OPTIONS: AlignOptions = {
   alignX: 'left',
   alignY: 'top',
 };
 
-export const CHILD_SIZE_PROPS: ChildSizeProps = {
-  childSizeX: '160',
-  childSizeY: '80',
-};
-
-export const ADJUST_PROPS: AdjustProps = {
+export const ADJUST_OPTIONS: AdjustOptions = {
   adjustX: 'none',
   adjustY: 'none',
 };
 
-export const SPACING_PROPS: SpacingProps = {
+export const CHILD_OPTIONS: ChildOptions = {
+  childX: undefined,
+  childY: undefined,
+};
+
+export const CHILD_COUNT_OPTIONS: ChildCountOptions = {
+  childCountX: '4' as any,
+  childCountY: '3' as any,
+};
+
+export const CHILD_SIZE_OPTIONS: ChildSizeOptions = {
+  childSizeX: '60',
+  childSizeY: '120',
+};
+
+export const SPACING_OPTIONS: SpacingOptions = {
   spacing: '8',
   spacingX: undefined,
   spacingY: undefined,
 };
 
-export const CHILD_COUNT_PROPS: any = {
-  childCountX: '4',
-  childCountY: '3',
-};
-
-export const GRID_TEMPLATE_PROPS = {
-  templateX: undefined,
-  templateY: undefined,
-};
-
-export const CONTAINER_PROPS: StyleProps = {
-  xPadding: '0',
-};
-
-export const CONTAINER_PARAMS: any = {
-  defaultSize: {
-    width: 400,
-    height: 400,
-  },
-};
-
-export const DEBUG_PARAMS: any = {
+export const DEBUG_PARAMS: DebugOptions = {
+  containerWidth: '600',
+  containerHeight: '450',
   childCount: 12,
   sizeType: 'none',
   posType: 'none',
@@ -242,80 +268,75 @@ export const DEBUG_PARAMS: any = {
 
 export const ARGS: Record<string, Record<string, any>> = {
   all: {
-    ...LAYOUT_PROPS,
-    ...DIRECTION_PROPS,
-    ...ALIGN_PROPS,
-    ...ADJUST_PROPS,
-    ...CHILD_SIZE_PROPS,
-    ...GRID_TEMPLATE_PROPS,
-    ...SPACING_PROPS,
-    ...CHILD_COUNT_PROPS,
-    ...CONTAINER_PROPS,
-    ...DEBUG_PARAMS,
+    ...LAYOUT_ARG_TYPES,
+    ...DIRECTION_ARG_TYPES,
+    ...ALIGN_ARG_TYPES,
+    ...ADJUST_ARG_TYPES,
+    ...SPACING_ARG_TYPES,
+    ...CHILD_OPTIONS,
+    ...CHILD_SIZE_ARG_TYPES,
+    ...CHILD_COUNT_ARG_TYPES,
+    ...DEBUG_ARG_TYPES,
   },
   nosize: {
-    ...LAYOUT_PROPS,
-    ...DIRECTION_PROPS,
-    ...ALIGN_PROPS,
-    ...ADJUST_PROPS,
-    ...GRID_TEMPLATE_PROPS,
-    ...SPACING_PROPS,
-    ...CHILD_COUNT_PROPS,
-    ...CONTAINER_PROPS,
-    ...DEBUG_PARAMS,
+    ...LAYOUT_ARG_TYPES,
+    ...DIRECTION_ARG_TYPES,
+    ...ALIGN_ARG_TYPES,
+    ...ADJUST_ARG_TYPES,
+    ...SPACING_ARG_TYPES,
+    ...CHILD_COUNT_ARG_TYPES,
+    ...DEBUG_ARG_TYPES,
   },
   balance: {
-    ...LAYOUT_PROPS,
-    ...DIRECTION_PROPS,
-    ...ALIGN_PROPS,
-    ...ADJUST_PROPS,
-    ...CHILD_SIZE_PROPS,
-    ...SPACING_PROPS,
-    ...CONTAINER_PROPS,
+    ...DIRECTION_OPTIONS,
+    ...ALIGN_OPTIONS,
+    ...ADJUST_OPTIONS,
+    ...CHILD_SIZE_OPTIONS,
+    ...SPACING_OPTIONS,
+    ...DEBUG_PARAMS,
+  },
+  flow: {
+    ...DIRECTION_OPTIONS,
+    ...ALIGN_OPTIONS,
+    ...ADJUST_OPTIONS,
+    ...SPACING_OPTIONS,
+    ...CHILD_SIZE_OPTIONS,
     ...DEBUG_PARAMS,
   },
   matrix: {
-    ...LAYOUT_PROPS,
-    ...DIRECTION_PROPS,
-    ...CHILD_SIZE_PROPS,
-    ...CHILD_COUNT_PROPS,
-    ...GRID_TEMPLATE_PROPS,
-    ...SPACING_PROPS,
-    ...CONTAINER_PROPS,
+    ...DIRECTION_OPTIONS,
+    ...ALIGN_OPTIONS,
+    ...ADJUST_OPTIONS,
+    ...CHILD_OPTIONS,
+    ...CHILD_SIZE_OPTIONS,
+    ...CHILD_COUNT_OPTIONS,
+    ...SPACING_OPTIONS,
     ...DEBUG_PARAMS,
   },
   pin: {
-    ...LAYOUT_PROPS,
-    ...CHILD_SIZE_PROPS,
-    ...CONTAINER_PROPS,
+    ...CHILD_SIZE_OPTIONS,
     ...DEBUG_PARAMS,
-    posType: 'rand',
+    posType: 'static',
   },
   pack: {
-    ...LAYOUT_PROPS,
-    ...DIRECTION_PROPS,
-    ...SPACING_PROPS,
-    ...CONTAINER_PROPS,
+    ...DIRECTION_OPTIONS,
+    ...SPACING_OPTIONS,
     ...DEBUG_PARAMS,
   },
   stack: {
-    ...LAYOUT_PROPS,
-    ...DIRECTION_PROPS,
-    ...ALIGN_PROPS,
-    ...ADJUST_PROPS,
-    ...SPACING_PROPS,
-    ...CHILD_SIZE_PROPS,
-    ...CONTAINER_PROPS,
+    ...DIRECTION_OPTIONS,
+    ...ALIGN_OPTIONS,
+    ...ADJUST_OPTIONS,
+    ...SPACING_OPTIONS,
+    ...CHILD_SIZE_OPTIONS,
     ...DEBUG_PARAMS,
   },
   tile: {
-    ...LAYOUT_PROPS,
-    ...DIRECTION_PROPS,
-    ...ALIGN_PROPS,
-    ...ADJUST_PROPS,
-    ...CHILD_SIZE_PROPS,
-    ...SPACING_PROPS,
-    ...CONTAINER_PROPS,
+    ...DIRECTION_OPTIONS,
+    ...ALIGN_OPTIONS,
+    ...ADJUST_OPTIONS,
+    ...CHILD_SIZE_OPTIONS,
+    ...SPACING_OPTIONS,
     ...DEBUG_PARAMS,
   },
 };

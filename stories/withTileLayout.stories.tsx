@@ -1,21 +1,22 @@
 /** @jsxImportSource @emotion/react */
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import type { WithTileLayoutProps } from '../src/hocs/withTileLayout';
-import withTileLayout from '../src/hocs/withTileLayout';
-import _createContainerDecorator from './_createContainerDecorator';
-import _createResizableContainer from './_createResizableContainer';
+import type { WithTileLayoutProps } from '../src/withTileLayout';
+import withTileLayout from '../src/withTileLayout';
+import createContainerDecorator from './_internal/createContainerDecorator';
+import createResizableContainer from './_internal/createResizableContainer';
 import type { BoxProps } from './Box';
 import Box from './Box';
-import { ARGS, ARG_TYPES, CONTAINER_PARAMS } from './constants';
+import { ARGS, ARG_TYPES } from './constants';
 
-const ResizableContainer = _createResizableContainer(
+const ResizableContainer = createResizableContainer(
   withTileLayout<BoxProps & WithTileLayoutProps, HTMLDivElement>(Box),
 );
 const meta = {
   title: 'withTileLayout',
   component: ResizableContainer,
   tags: ['layout'],
-  decorators: _createContainerDecorator(),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  decorators: createContainerDecorator() as any,
 } satisfies Meta<typeof ResizableContainer>;
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -26,5 +27,4 @@ export const Default: Story = {
     ...ARGS.tile,
     childCount: 12,
   },
-  parameters: CONTAINER_PARAMS,
 };
